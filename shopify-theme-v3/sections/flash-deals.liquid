@@ -1,0 +1,190 @@
+{%- comment -%}
+  Flash Deals Section — Countdown timer + deal cards
+{%- endcomment -%}
+
+<section class="flash-deals-section animate-on-scroll">
+  <div class="container">
+    <div class="flash-deals-header">
+      <div>
+        <h2 style="font-size: 2.5rem; margin-bottom: 8px;">
+          <span class="text-gradient">{{ section.settings.heading_highlight | default: 'Flash Deals' }}</span>
+          {{ section.settings.heading_suffix | default: 'Exclusive' }}
+        </h2>
+        <p style="color: var(--text-muted); font-size: 1rem;">
+          {{ section.settings.subtext | default: 'Limited quantity offers on pro hardware' }}
+        </p>
+      </div>
+      <div class="countdown-timer">
+        <div class="countdown-item">
+          <span class="countdown-val">{{ section.settings.hours | default: '08' }}</span>
+          <span class="countdown-label">Hrs</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-val">{{ section.settings.minutes | default: '42' }}</span>
+          <span class="countdown-label">Min</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-val">{{ section.settings.seconds | default: '15' }}</span>
+          <span class="countdown-label">Sec</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-scroller-wrapper animate-on-scroll" style="margin-top: 20px">
+      <button class="scroll-btn scroll-left" onclick="scrollSection('flashScroller', -1)" aria-label="Scroll left">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <div class="product-scroller" id="flashScroller">
+        {%- if section.settings.collection != blank -%}
+          {%- for product in collections[section.settings.collection].products limit: section.settings.max_products -%}
+            {%- assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+            {% render 'product-card',
+              card_class: 'flash-card',
+              product_image: product.featured_image | image_url: width: 400,
+              product_title: product.title,
+              product_category: product.type,
+              product_price: product.price | money,
+              compare_price: product.compare_at_price | money,
+              badge_text: discount | append: '% OFF',
+              badge_type: 'flash',
+              hide_actions: true
+            %}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'deal' -%}
+              {% render 'product-card',
+                card_class: 'flash-card',
+                product_image: block.settings.image | image_url: width: 400 | default: block.settings.image_url,
+                product_title: block.settings.title,
+                product_category: block.settings.category,
+                product_price: block.settings.price,
+                compare_price: block.settings.compare_price,
+                badge_text: block.settings.badge,
+                badge_type: 'flash',
+                hide_actions: true
+              %}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+
+      <button class="scroll-btn scroll-right" onclick="scrollSection('flashScroller', 1)" aria-label="Scroll right">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Flash Deals",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading Highlight",
+      "default": "Flash Deals"
+    },
+    {
+      "type": "text",
+      "id": "heading_suffix",
+      "label": "Heading Suffix",
+      "default": "Exclusive"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Limited quantity offers on pro hardware"
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Timer Hours",
+      "default": "08"
+    },
+    {
+      "type": "text",
+      "id": "minutes",
+      "label": "Timer Minutes",
+      "default": "42"
+    },
+    {
+      "type": "text",
+      "id": "seconds",
+      "label": "Timer Seconds",
+      "default": "15"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Shopify Collection (optional)"
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Max Products",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "default": 12
+    }
+  ],
+  "blocks": [
+    {
+      "type": "deal",
+      "name": "Deal Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Image"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Image URL (fallback)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "Deal Product"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category",
+          "default": "Components"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Sale Price",
+          "default": "₹52,499"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Original Price",
+          "default": "₹68,000"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge Text",
+          "default": "-35%"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Flash Deals",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,69 @@
+{%- comment -%}
+  Sales Popup — Live sales notification popup
+{%- endcomment -%}
+
+{%- if section.settings.enabled -%}
+  <div class="sales-popup" id="salesPopup"
+    data-names="{{ section.settings.names }}"
+    data-products="{{ section.settings.products }}"
+    data-times="{{ section.settings.times }}">
+    <div class="sales-popup-img">
+      <i class="fa-solid fa-fire-flame-curved" style="color: var(--accent-red); font-size: 1.5rem;"></i>
+    </div>
+    <div class="sales-popup-text">
+      <p class="sales-popup-name" id="spName">{{ section.settings.default_name | default: 'Customer' }}</p>
+      <p class="sales-popup-action">just bought <span id="spProduct" style="color:var(--accent);font-weight:600;">{{ section.settings.default_product | default: 'a product' }}</span></p>
+      <p class="sales-popup-time" id="spTime">{{ section.settings.default_time | default: '2 minutes ago' }}</p>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Sales Popup",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable Sales Popup",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "names",
+      "label": "Customer Names (pipe-separated)",
+      "default": "Rahul from Mumbai|Vikram from Delhi|Sneha from Bangalore|Arjun from Pune|Vivek from Hyderabad"
+    },
+    {
+      "type": "text",
+      "id": "products",
+      "label": "Product Names (pipe-separated)",
+      "default": "RTX 4090 OC|AMD Ryzen 9 7950X|Pro Display XDR|Studio ANC Wireless|ROG Maximus Z790"
+    },
+    {
+      "type": "text",
+      "id": "times",
+      "label": "Time Texts (pipe-separated)",
+      "default": "12 seconds ago|2 minutes ago|5 minutes ago|just now|18 minutes ago"
+    },
+    {
+      "type": "text",
+      "id": "default_name",
+      "label": "Default Name",
+      "default": "Rahul from Mumbai"
+    },
+    {
+      "type": "text",
+      "id": "default_product",
+      "label": "Default Product",
+      "default": "RTX 4090 OC"
+    },
+    {
+      "type": "text",
+      "id": "default_time",
+      "label": "Default Time",
+      "default": "2 minutes ago"
+    }
+  ]
+}
+{% endschema %}

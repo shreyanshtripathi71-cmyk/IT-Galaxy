@@ -1,0 +1,222 @@
+{%- comment -%}
+  Bento Grid — Monitor/Tech Showcase
+{%- endcomment -%}
+
+<section class="section-padding" style="background: #000">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <h2>
+        <span class="text-gradient">{{ section.settings.heading_highlight | default: 'Engineered' }}</span>
+        {{ section.settings.heading_suffix | default: 'for Excellence' }}
+      </h2>
+      <p>{{ section.settings.subtext | default: 'Uncompromising visual fidelity from the world\'s leading monitor brands.' }}</p>
+
+      {%- if section.settings.show_brand_tags -%}
+        <div style="display:flex;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap;">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'brand_tag' -%}
+              <span style="padding:5px 16px;border:1px solid rgba(255,255,255,0.1);font-size:0.75rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.6);font-family:var(--font-heading);"
+                {{ block.shopify_attributes }}>
+                {{ block.settings.name }}
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="bento-grid">
+      <!-- Main Large Card -->
+      <div class="bento-card large animate-on-scroll" style="grid-area: main">
+        {%- if section.settings.main_image != blank -%}
+          <img src="{{ section.settings.main_image | image_url: width: 800 }}" alt="{{ section.settings.main_title }}" loading="lazy" />
+        {%- endif -%}
+        <div class="bento-content">
+          <h3>{{ section.settings.main_title | default: 'Odyssey OLED G9' }}</h3>
+          <p>{{ section.settings.main_desc | default: '49" Curved Dual QHD 240Hz.' }}</p>
+        </div>
+      </div>
+
+      <!-- Side Card 1 (Icon + Text) -->
+      <div class="bento-card animate-on-scroll" style="grid-area:side1;background:linear-gradient(45deg,#120a1a,#0a0a12);justify-content:center;align-items:center;text-align:center;">
+        <i class="{{ section.settings.side1_icon | default: 'fa-solid fa-eye' }}" style="font-size:3rem;color:var(--accent);margin-bottom:15px;"></i>
+        <h3>{{ section.settings.side1_title | default: 'IPS Black' }}</h3>
+        <p>{{ section.settings.side1_desc | default: 'True 2000:1 Contrast.' }}</p>
+      </div>
+
+      <!-- Side Card 2 -->
+      <div class="bento-card animate-on-scroll" style="grid-area: side2">
+        {%- if section.settings.side2_image != blank -%}
+          <img src="{{ section.settings.side2_image | image_url: width: 400 }}" alt="{{ section.settings.side2_title }}" style="opacity: 0.5" loading="lazy" />
+        {%- endif -%}
+        <div class="bento-content">
+          <h3>{{ section.settings.side2_title | default: '8K Ready' }}</h3>
+          <p>{{ section.settings.side2_desc | default: 'Creator displays.' }}</p>
+        </div>
+      </div>
+
+      <!-- Bottom Wide Card with Sweep Animation -->
+      <div class="bento-card wide animate-on-scroll" style="grid-area:bottom;overflow:hidden;position:relative">
+        <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,210,255,0.1),transparent);animation:sweepRefresh 2s linear infinite;"></div>
+        <div style="display:flex;gap:40px;align-items:center;position:relative;z-index:2;">
+          <div style="flex: 1">
+            <h3>
+              <span style="color: var(--accent)">{{ section.settings.bottom_stat | default: '500Hz' }}</span>
+              {{ section.settings.bottom_title | default: 'Refresh Rate' }}
+            </h3>
+            <p>{{ section.settings.bottom_desc | default: '0.03ms Response time for competitive esports superiority.' }}</p>
+          </div>
+          <div class="tech-radar" style="position:relative;width:60px;height:60px">
+            <i class="fa-solid fa-bolt" style="font-size:2rem;color:var(--accent);position:absolute;animation:freefallBounce 4s ease-in-out infinite alternate;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bento Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading Highlight",
+      "default": "Engineered"
+    },
+    {
+      "type": "text",
+      "id": "heading_suffix",
+      "label": "Heading Suffix",
+      "default": "for Excellence"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Uncompromising visual fidelity from the world's leading monitor brands."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_brand_tags",
+      "label": "Show Brand Tags",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Main Card"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Image"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Main Title",
+      "default": "Odyssey OLED G9"
+    },
+    {
+      "type": "text",
+      "id": "main_desc",
+      "label": "Main Description",
+      "default": "49\" Curved Dual QHD 240Hz."
+    },
+    {
+      "type": "header",
+      "content": "Side Card 1"
+    },
+    {
+      "type": "text",
+      "id": "side1_icon",
+      "label": "Side 1 Icon Class",
+      "default": "fa-solid fa-eye"
+    },
+    {
+      "type": "text",
+      "id": "side1_title",
+      "label": "Side 1 Title",
+      "default": "IPS Black"
+    },
+    {
+      "type": "text",
+      "id": "side1_desc",
+      "label": "Side 1 Description",
+      "default": "True 2000:1 Contrast."
+    },
+    {
+      "type": "header",
+      "content": "Side Card 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "side2_image",
+      "label": "Side 2 Image"
+    },
+    {
+      "type": "text",
+      "id": "side2_title",
+      "label": "Side 2 Title",
+      "default": "8K Ready"
+    },
+    {
+      "type": "text",
+      "id": "side2_desc",
+      "label": "Side 2 Description",
+      "default": "Creator displays."
+    },
+    {
+      "type": "header",
+      "content": "Bottom Card"
+    },
+    {
+      "type": "text",
+      "id": "bottom_stat",
+      "label": "Bottom Stat",
+      "default": "500Hz"
+    },
+    {
+      "type": "text",
+      "id": "bottom_title",
+      "label": "Bottom Title",
+      "default": "Refresh Rate"
+    },
+    {
+      "type": "text",
+      "id": "bottom_desc",
+      "label": "Bottom Description",
+      "default": "0.03ms Response time for competitive esports superiority."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand_tag",
+      "name": "Brand Tag",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Brand Name",
+          "default": "Brand"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bento Grid",
+      "blocks": [
+        { "type": "brand_tag", "settings": { "name": "Dell" } },
+        { "type": "brand_tag", "settings": { "name": "HP" } },
+        { "type": "brand_tag", "settings": { "name": "Lenovo" } },
+        { "type": "brand_tag", "settings": { "name": "BenQ" } },
+        { "type": "brand_tag", "settings": { "name": "Acer" } },
+        { "type": "brand_tag", "settings": { "name": "MSI" } },
+        { "type": "brand_tag", "settings": { "name": "Samsung" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

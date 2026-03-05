@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Galaxy | Premium Gamer Aesthetics</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jura:wght@400;500;600;700&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Cosmic Gamer Theme Variables */
+        :root {
+            --bg-base: #09090b;
+            --bg-surface: #18181b;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+
+            /* Fifine inspired Neons */
+            --neon-purple: #c026d3;
+            --neon-blue: #0ea5e9;
+            --neon-pink: #db2777;
+
+            /* Gradients */
+            --grad-primary: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            --grad-secondary: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+
+            --glass-bg: rgba(24, 24, 27, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --transition-fast: 0.2s ease;
+            --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: radial-gradient(circle at 50% 0%, rgba(192, 38, 211, 0.1) 0%, transparent 50%);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Jura', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 4%;
+        }
+
+        .section-py {
+            padding: 100px 0;
+        }
+
+        /* TPSTech style Trust Bar */
+        .trust-bar {
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 8px 0;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .trust-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .trust-badges span {
+            margin-right: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .trust-badges i {
+            color: var(--neon-blue);
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-family: 'Jura', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--grad-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Fifine style AI Search Bar */
+        .search-container {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 40px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            background: var(--bg-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            color: white;
+            font-family: 'Outfit';
+            transition: var(--transition-smooth);
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 15px rgba(192, 38, 211, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--neon-purple);
+        }
+
+        .ai-badge {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: var(--grad-primary);
+            font-size: 0.65rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-actions i {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .nav-actions i:hover {
+            color: white;
+        }
+
+        /* Mega Menu Simulation (TPSTech Style) */
+        .cat-menu {
+            display: flex;
+            gap: 30px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--glass-border);
+            justify-content: center;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .cat-menu a:hover {
+            color: var(--neon-blue);
+        }
+
+        /* Hero Banner */
+        .hero {
+            position: relative;
+            padding: 80px 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 span {
+            background: var(--grad-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        /* Fifine Pill Buttons */
+        .btn-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            background: var(--bg-surface);
+            color: white;
+            border: 2px solid transparent;
+            position: relative;
+            z-index: 1;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .btn-pill::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--grad-primary);
+            z-index: -2;
+            border-radius: 50px;
+        }
+
+        .btn-pill::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: var(--bg-base);
+            z-index: -1;
+            border-radius: 50px;
+            transition: var(--transition-fast);
+        }
+
+        .btn-pill:hover::after {
+            background: transparent;
+        }
+
+        .hero-img {
+            position: relative;
+        }
+
+        .hero-img img {
+            width: 100%;
+            filter: drop-shadow(0 0 30px rgba(192, 38, 211, 0.4));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* 3D Category Showcases (Fifine Style) */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .showcase-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .showcase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 100%, rgba(14, 165, 233, 0.1), transparent 60%);
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .showcase-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15);
+        }
+
+        .showcase-card:hover::before {
+            opacity: 1;
+        }
+
+        .showcase-img {
+            height: 150px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .showcase-img img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+            filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.6));
+        }
+
+        .showcase-card:hover .showcase-img img {
+            transform: scale(1.15);
+        }
+
+        .showcase-card h3 {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        /* Product Grid (TPSTech structure + Dark theme) */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .prod-card {
+            background: var(--bg-surface);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .prod-card:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(192, 38, 211, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .prod-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(219, 39, 119, 0.1);
+            color: var(--neon-pink);
+            border: 1px solid var(--neon-pink);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .prod-img {
+            height: 220px;
+            position: relative;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .prod-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 20px;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .prod-card:hover .prod-img img {
+            transform: scale(1.1);
+        }
+
+        .prod-info h4 {
+            font-size: 1.1rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .prod-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-base);
+            color: white;
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            font-family: 'Outfit';
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .prod-card:hover .add-to-cart {
+            background: var(--grad-primary);
+            border-color: transparent;
+        }
+
+        /* Floating Widgets (TheITGear Style) */
+        .floater {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 999;
+        }
+
+        .float-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .float-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .float-wa {
+            background: #25D366;
+        }
+
+        .float-top {
+            background: var(--bg-surface);
+            border: 1px solid var(--glass-border);
+            font-size: 1.2rem;
+        }
+
+        /* Animations */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .showcase-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .search-container {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-content {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TPSTech Trust Bar -->
+    <div class="trust-bar">
+        <div class="container trust-content">
+            <div class="trust-badges">
+                <span><i class="fa-solid fa-truck-fast"></i> Free Shipping In India</span>
+                <span><i class="fa-solid fa-shield-halved"></i> 100% Genuine Products</span>
+            </div>
+            <div>
+                <a href="#">Support 24/7</a> | <a href="#">Track Order</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">IT GALAXY</a>
+
+            <!-- Fifine AI Search -->
+            <div class="search-container">
+                <i class="fa-solid fa-sparkles search-icon"></i>
+                <input type="text" class="search-bar" placeholder="Ask AI to find products...">
+                <span class="ai-badge">AI Powered</span>
+            </div>
+
+            <div class="nav-actions">
+                <i class="fa-regular fa-user"></i>
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+        </div>
+
+        <!-- TPSTech Mega Menu Structure -->
+        <div class="container cat-menu">
+            <a href="#">Components <i class="fa-solid fa-angle-down"></i></a>
+            <a href="#">Laptops <i class="fa-solid fa-angle-down"></i></a>
+            <a href="#">Peripherals <i class="fa-solid fa-angle-down"></i></a>
+            <a href="#">Audio & Streaming <i class="fa-solid fa-angle-down"></i></a>
+            <a href="#">Networking</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero container">
+        <div class="hero-grid">
+            <div class="hero-text fade-up">
+                <h1>Level Up Your <br><span>Digital Arsenal</span></h1>
+                <p>Equip yourself with elite performance hardware. From next-gen GPUs to professional studio audio gear.
+                </p>
+                <a href="#" class="btn-pill">Explore Gear <i class="fa-solid fa-arrow-right"
+                        style="margin-left: 10px;"></i></a>
+            </div>
+            <div class="hero-img fade-up">
+                <!-- Gamer Tech Image -->
+                <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Premium Headset" style="border-radius: 20px;">
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Category Showcase (Fifine Style) -->
+    <section class="section-py container">
+        <div class="section-title fade-up">
+            <h2>The Ecosystem</h2>
+        </div>
+
+        <div class="showcase-grid">
+            <div class="showcase-card fade-up">
+                <div class="showcase-img">
+                    <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        alt="Keyboards">
+                </div>
+                <h3>Pro Keyboards</h3>
+            </div>
+
+            <div class="showcase-card fade-up" style="transition-delay: 0.1s;">
+                <div class="showcase-img">
+                    <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        alt="Audio">
+                </div>
+                <h3>Studio Audio</h3>
+            </div>
+
+            <div class="showcase-card fade-up" style="transition-delay: 0.2s;">
+                <div class="showcase-img">
+                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        alt="Components">
+                </div>
+                <h3>PC Components</h3>
+            </div>
+
+            <div class="showcase-card fade-up" style="transition-delay: 0.3s;">
+                <div class="showcase-img">
+                    <img src="https://images.unsplash.com/photo-1625842268584-8f3296236761?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        alt="Mice">
+                </div>
+                <h3>Precision Mice</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Structured Product Grid (TPSTech Style) -->
+    <section class="section-py container" style="padding-top: 0;">
+        <div class="section-title fade-up"
+            style="display: flex; justify-content: space-between; align-items: flex-end;">
+            <h2 style="margin: 0;">New Arrivals</h2>
+            <a href="#" style="color: var(--neon-blue); font-family: 'Outfit'; font-weight: 600;">View All Inventory
+                &rarr;</a>
+        </div>
+
+        <div class="product-grid">
+            <!-- P1 -->
+            <div class="prod-card fade-up">
+                <span class="prod-badge">Save 30%</span>
+                <div class="prod-img">
+                    <img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        alt="Controller">
+                </div>
+                <div class="prod-info">
+                    <h4>Elite Wireless Pro Controller (Carbon)</h4>
+                    <div class="prod-price">₹4,499</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- P2 -->
+            <div class="prod-card fade-up">
+                <div class="prod-img">
+                    <img src="https://images.unsplash.com/photo-1563203369-26f2e4a5ccf7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        alt="SSD">
+                </div>
+                <div class="prod-info">
+                    <h4>2TB NVMe Gen4 Heatsink SSD</h4>
+                    <div class="prod-price">₹18,500</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- P3 -->
+            <div class="prod-card fade-up">
+                <span class="prod-badge"
+                    style="background: rgba(14,165,233,0.1); color: var(--neon-blue); border-color: var(--neon-blue);">Just
+                    In</span>
+                <div class="prod-img">
+                    <img src="https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        alt="Laptop">
+                </div>
+                <div class="prod-info">
+                    <h4>Stealth 15 Pro Creator Laptop (RTX 4070)</h4>
+                    <div class="prod-price">₹1,45,000</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- P4 -->
+            <div class="prod-card fade-up">
+                <div class="prod-img">
+                    <img src="https://images.unsplash.com/photo-1625842268584-8f3296236761?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                        alt="Mouse">
+                </div>
+                <div class="prod-info">
+                    <h4>Ultra-Light RGB Gaming Mouse (60g)</h4>
+                    <div class="prod-price">₹6,999</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TheITGear Floating Widgets -->
+    <div class="floater">
+        <a href="https://wa.me/" class="float-btn float-wa" title="Chat on WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="#" class="float-btn float-top" title="Back to top" onclick="window.scrollTo(0,0); return false;">
+            <i class="fa-solid fa-arrow-up"></i>
+        </a>
+    </div>
+
+    <!-- Scripts for Scroll Anim -->
+    <script>
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>

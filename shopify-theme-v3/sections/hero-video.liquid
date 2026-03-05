@@ -1,0 +1,140 @@
+{%- comment -%}
+  Hero Section — Video Background with Heading, Subtext, CTAs
+{%- endcomment -%}
+
+<section class="hero" id="home">
+  {%- if section.settings.video_url != blank -%}
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="{{ section.settings.video_url }}" type="video/mp4" />
+    </video>
+  {%- endif -%}
+
+  <div class="hero-overlay"></div>
+  <div class="scanline"></div>
+
+  <div class="container hero-content">
+    <div class="hero-text">
+      <h1>
+        {{ section.settings.heading_line1 | default: 'Powering Your' }} <br />
+        <span class="text-gradient">{{ section.settings.heading_highlight | default: 'Digital Universe' }}</span>
+      </h1>
+      <p>{{ section.settings.subtext | default: 'Premium laptops, PC components and electronics delivered across India with speed, security and trust.' }}</p>
+
+      <div class="hero-buttons">
+        {%- if section.settings.primary_btn_text != blank -%}
+          <a href="{{ section.settings.primary_btn_link | default: '/collections/all' }}" class="btn btn-primary">
+            {{ section.settings.primary_btn_text }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.secondary_btn_text != blank -%}
+          <a href="{{ section.settings.secondary_btn_link | default: '#' }}" class="btn btn-outline">
+            {{ section.settings.secondary_btn_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.show_trust_badges -%}
+        <div class="hero-trust-badges">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'trust_badge' -%}
+              <span {{ block.shopify_attributes }}>
+                <i class="{{ block.settings.icon_class }}" style="color:rgba(255,255,255,0.35);margin-right:6px;"></i>
+                {{ block.settings.text }}
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Video",
+  "settings": [
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL (MP4)",
+      "default": "https://cdn.shopify.com/videos/c/o/v/a53e81accf244f1f9c2f049dcca45e8a.mp4"
+    },
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading Line 1",
+      "default": "Powering Your"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading Highlight Text",
+      "default": "Digital Universe"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Premium laptops, PC components and electronics delivered across India with speed, security and trust."
+    },
+    {
+      "type": "text",
+      "id": "primary_btn_text",
+      "label": "Primary Button Text",
+      "default": "Explore Products"
+    },
+    {
+      "type": "url",
+      "id": "primary_btn_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_btn_text",
+      "label": "Secondary Button Text",
+      "default": "View Deals"
+    },
+    {
+      "type": "url",
+      "id": "secondary_btn_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_badges",
+      "label": "Show Trust Badges",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_badge",
+      "name": "Trust Badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_class",
+          "label": "Icon Class",
+          "default": "fa-solid fa-circle-check"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Badge Text",
+          "default": "100% Genuine"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Video",
+      "blocks": [
+        { "type": "trust_badge", "settings": { "icon_class": "fa-solid fa-circle-check", "text": "100% Genuine" } },
+        { "type": "trust_badge", "settings": { "icon_class": "fa-solid fa-file-invoice", "text": "GST Invoices" } },
+        { "type": "trust_badge", "settings": { "icon_class": "fa-solid fa-truck-fast", "text": "Pan-India Dispatch" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

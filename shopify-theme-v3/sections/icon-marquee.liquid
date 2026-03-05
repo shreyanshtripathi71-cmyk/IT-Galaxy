@@ -1,0 +1,62 @@
+{%- comment -%}
+  Icon Marquee — Scrolling icon + text marquee
+{%- endcomment -%}
+
+<section class="icon-marquee-section">
+  <div class="icon-marquee-inner">
+    {%- for block in section.blocks -%}
+      <div class="icon-item" {{ block.shopify_attributes }}>
+        <i class="{{ block.settings.icon }}"></i> {{ block.settings.label }}
+      </div>
+    {%- endfor -%}
+    <!-- Duplicate for seamless loop -->
+    {%- for block in section.blocks -%}
+      <div class="icon-item">
+        <i class="{{ block.settings.icon }}"></i> {{ block.settings.label }}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Icon Marquee",
+  "blocks": [
+    {
+      "type": "icon_item",
+      "name": "Icon Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon Class (Font Awesome)",
+          "default": "fa-solid fa-laptop"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "LAPTOPS"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon Marquee",
+      "blocks": [
+        { "type": "icon_item", "settings": { "icon": "fa-solid fa-laptop", "label": "LAPTOPS" } },
+        { "type": "icon_item", "settings": { "icon": "fa-solid fa-microchip", "label": "CPU" } },
+        { "type": "icon_item", "settings": { "icon": "fa-solid fa-memory", "label": "RAM" } },
+        { "type": "icon_item", "settings": { "icon": "fa-solid fa-keyboard", "label": "KEYBOARDS" } },
+        { "type": "icon_item", "settings": { "icon": "fa-solid fa-mouse", "label": "MICE" } },
+        { "type": "icon_item", "settings": { "icon": "fa-solid fa-headphones", "label": "AUDIO" } },
+        { "type": "icon_item", "settings": { "icon": "fa-solid fa-wifi", "label": "ROUTERS" } },
+        { "type": "icon_item", "settings": { "icon": "fa-solid fa-print", "label": "PRINTERS" } },
+        { "type": "icon_item", "settings": { "icon": "fa-solid fa-display", "label": "MONITORS" } },
+        { "type": "icon_item", "settings": { "icon": "fa-solid fa-camera", "label": "CAMERAS" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

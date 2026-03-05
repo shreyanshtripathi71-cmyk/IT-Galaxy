@@ -1,0 +1,70 @@
+{%- comment -%}
+  CTA Banner — Mid-page call to action
+{%- endcomment -%}
+
+<section class="cta-section animate-on-scroll">
+  <div class="container cta-container">
+    <div class="cta-content">
+      <h2>
+        {{ section.settings.heading_line1 | default: 'Enterprise' }} <br />
+        <span class="text-gradient">{{ section.settings.heading_highlight | default: 'Networking Solutions' }}</span>
+      </h2>
+      <p>{{ section.settings.description | default: 'Deploy high-capacity networking infrastructure with professional gear from TP-Link, Ubiquiti, and MikroTik.' }}</p>
+      {%- if section.settings.btn_text != blank -%}
+        <a href="{{ section.settings.btn_link | default: '#' }}" class="btn btn-primary">{{ section.settings.btn_text }}</a>
+      {%- endif -%}
+    </div>
+    <div class="cta-image">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.heading_highlight }}" style="border-radius:20px" loading="lazy" />
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "CTA Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading Line 1",
+      "default": "Enterprise"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading Highlight",
+      "default": "Networking Solutions"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Deploy high-capacity networking infrastructure with professional gear from TP-Link, Ubiquiti, and MikroTik. Scalable solutions for modern offices and data centers."
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "Explore Enterprise"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "CTA Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "CTA Banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,228 @@
+{%- comment -%}
+  Header Section — Navbar + Mega Menu
+  Fully customizable via Shopify Theme Editor
+{%- endcomment -%}
+
+<header class="site-header" id="siteHeader">
+  <div class="nav-container">
+    <a href="/" class="logo">
+      {%- if section.settings.logo_image != blank -%}
+        <img src="{{ section.settings.logo_image | image_url: width: 200 }}"
+          alt="{{ shop.name }}"
+          width="200"
+          height="auto"
+          loading="eager" />
+      {%- else -%}
+        <i class="{{ section.settings.logo_icon | default: 'fa-solid fa-atom' }}"></i>
+        {{ section.settings.store_name | default: shop.name }}
+      {%- endif -%}
+    </a>
+
+    <ul class="nav-links" id="mainNav">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'nav_link' -%}
+          <li data-menu="{{ block.settings.menu_id }}">
+            <a href="{{ block.settings.link | default: '#' }}">{{ block.settings.label }}</a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+
+    <div class="nav-icons">
+      <a href="/search" aria-label="Search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </a>
+      <a href="/account" aria-label="Account">
+        <i class="fa-regular fa-user"></i>
+      </a>
+      <a href="/cart" class="cart-icon" aria-label="Cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-badge">{{ cart.item_count }}</span>
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Menu" onclick="document.getElementById('mainNav').classList.toggle('mobile-open')">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mega Menu Container -->
+  <div class="mega-menu" id="megaMenu">
+    <div class="mega-menu-content" id="megaContent"></div>
+  </div>
+
+  {%- comment -%} Hidden templates for mega menu content {%- endcomment -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'mega_menu' -%}
+      <template id="mega-menu-{{ block.settings.menu_id }}">
+        <div style="display:flex;gap:40px;width:100%;max-width:1200px;justify-content:center;">
+          <div style="display:flex;gap:30px;flex:3;">
+            {%- if block.settings.promo_image_1 != blank -%}
+              <div class="mega-menu-promo" style="margin:0;flex:1;align-items:flex-start;max-width:none;background:transparent;border:none;padding:0;">
+                <img src="{{ block.settings.promo_image_1 | image_url: width: 400 }}" style="height:140px;object-fit:cover;width:100%;border-radius:8px;margin-bottom:15px;" alt="{{ block.settings.promo_title_1 }}" loading="lazy">
+                <h4 style="color:white;margin-bottom:5px;font-size:1.1rem;font-family:'Rajdhani',sans-serif;">{{ block.settings.promo_title_1 }}</h4>
+                <a href="{{ block.settings.promo_link_1 | default: '#' }}" style="color:var(--accent);font-size:0.85rem;">{{ block.settings.promo_cta_1 | default: 'Shop Now →' }}</a>
+              </div>
+            {%- endif -%}
+            {%- if block.settings.promo_image_2 != blank -%}
+              <div class="mega-menu-promo" style="margin:0;flex:1;align-items:flex-start;max-width:none;background:transparent;border:none;padding:0;">
+                <img src="{{ block.settings.promo_image_2 | image_url: width: 400 }}" style="height:140px;object-fit:cover;width:100%;border-radius:8px;margin-bottom:15px;" alt="{{ block.settings.promo_title_2 }}" loading="lazy">
+                <h4 style="color:white;margin-bottom:5px;font-size:1.1rem;font-family:'Rajdhani',sans-serif;">{{ block.settings.promo_title_2 }}</h4>
+                <a href="{{ block.settings.promo_link_2 | default: '#' }}" style="color:var(--accent);font-size:0.85rem;">{{ block.settings.promo_cta_2 | default: 'Shop Now →' }}</a>
+              </div>
+            {%- endif -%}
+            {%- if block.settings.promo_image_3 != blank -%}
+              <div class="mega-menu-promo" style="margin:0;flex:1;align-items:flex-start;max-width:none;background:transparent;border:none;padding:0;">
+                <img src="{{ block.settings.promo_image_3 | image_url: width: 400 }}" style="height:140px;object-fit:cover;width:100%;border-radius:8px;margin-bottom:15px;" alt="{{ block.settings.promo_title_3 }}" loading="lazy">
+                <h4 style="color:white;margin-bottom:5px;font-size:1.1rem;font-family:'Rajdhani',sans-serif;">{{ block.settings.promo_title_3 }}</h4>
+                <a href="{{ block.settings.promo_link_3 | default: '#' }}" style="color:var(--accent);font-size:0.85rem;">{{ block.settings.promo_cta_3 | default: 'Shop Now →' }}</a>
+              </div>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.side_links != blank -%}
+            <div style="width:1px;background:rgba(255,255,255,0.1);margin:0 10px;"></div>
+            <div class="mega-menu-column" style="flex:1;justify-content:flex-start;padding-top:10px;">
+              <div class="mega-menu-title" style="margin-bottom:15px;">More Categories</div>
+              {%- assign links = block.settings.side_links | split: '|' -%}
+              {%- for link_text in links -%}
+                <a href="/collections/{{ link_text | handleize }}">{{ link_text }}</a>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </template>
+    {%- endif -%}
+  {%- endfor -%}
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "store_name",
+      "label": "Store Name",
+      "default": "IT Galaxy"
+    },
+    {
+      "type": "text",
+      "id": "logo_icon",
+      "label": "Logo Icon Class (Font Awesome)",
+      "default": "fa-solid fa-atom"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image (overrides icon)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_link",
+      "name": "Navigation Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Link"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "URL"
+        },
+        {
+          "type": "text",
+          "id": "menu_id",
+          "label": "Menu ID (for mega menu)",
+          "info": "Use a simple key like 'accessories', 'monitors', etc."
+        }
+      ]
+    },
+    {
+      "type": "mega_menu",
+      "name": "Mega Menu Content",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_id",
+          "label": "Menu ID (must match nav link)",
+          "info": "This connects the mega menu content to the navigation link"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_1",
+          "label": "Promo Image 1"
+        },
+        {
+          "type": "text",
+          "id": "promo_title_1",
+          "label": "Promo Title 1"
+        },
+        {
+          "type": "url",
+          "id": "promo_link_1",
+          "label": "Promo Link 1"
+        },
+        {
+          "type": "text",
+          "id": "promo_cta_1",
+          "label": "Promo CTA 1",
+          "default": "Shop Now →"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_2",
+          "label": "Promo Image 2"
+        },
+        {
+          "type": "text",
+          "id": "promo_title_2",
+          "label": "Promo Title 2"
+        },
+        {
+          "type": "url",
+          "id": "promo_link_2",
+          "label": "Promo Link 2"
+        },
+        {
+          "type": "text",
+          "id": "promo_cta_2",
+          "label": "Promo CTA 2",
+          "default": "Shop Now →"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image_3",
+          "label": "Promo Image 3"
+        },
+        {
+          "type": "text",
+          "id": "promo_title_3",
+          "label": "Promo Title 3"
+        },
+        {
+          "type": "url",
+          "id": "promo_link_3",
+          "label": "Promo Link 3"
+        },
+        {
+          "type": "text",
+          "id": "promo_cta_3",
+          "label": "Promo CTA 3",
+          "default": "Shop Now →"
+        },
+        {
+          "type": "text",
+          "id": "side_links",
+          "label": "Side Links (pipe-separated)",
+          "info": "e.g. Gaming Mice|Webcams|Controllers|Cables"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

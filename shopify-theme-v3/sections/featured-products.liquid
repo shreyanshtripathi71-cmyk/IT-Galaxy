@@ -1,0 +1,173 @@
+{%- comment -%}
+  Featured Products Section — Top Selling horizontal scroller
+  Uses Shopify collections when connected, falls back to blocks
+{%- endcomment -%}
+
+<section class="section-padding" style="padding-top: 80px; overflow-x: hidden">
+  <div class="container">
+    <div class="section-header animate-on-scroll" style="text-align:left;display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;">
+      <div>
+        <h2 style="font-size: 2.5rem;">
+          <span class="text-gradient">{{ section.settings.heading_highlight | default: 'Top Selling' }}</span>
+          {{ section.settings.heading_suffix | default: 'Products' }}
+        </h2>
+        <p>{{ section.settings.subtext | default: 'Trending hardware loved by our customers' }}</p>
+      </div>
+      {%- if section.settings.view_all_link != blank -%}
+        <a href="{{ section.settings.view_all_link }}" style="color:var(--accent);font-weight:600">
+          View All <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="product-scroller-wrapper animate-on-scroll" style="margin-top: 20px">
+      <button class="scroll-btn scroll-left" onclick="scrollSection('productScroller', -1)" aria-label="Scroll left">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <div class="product-scroller" id="productScroller">
+        {%- if section.settings.collection != blank -%}
+          {%- for product in collections[section.settings.collection].products limit: section.settings.max_products -%}
+            {% render 'product-card',
+              product_image: product.featured_image | image_url: width: 400,
+              product_title: product.title,
+              product_category: product.type,
+              product_price: product.price | money,
+              compare_price: product.compare_at_price | money,
+              product_rating: null,
+              badge_text: null
+            %}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'product' -%}
+              {% render 'product-card',
+                product_image: block.settings.image | image_url: width: 400 | default: block.settings.image_url,
+                product_title: block.settings.title,
+                product_category: block.settings.category,
+                product_price: block.settings.price,
+                compare_price: block.settings.compare_price,
+                product_rating: block.settings.rating,
+                badge_text: block.settings.badge,
+                badge_color: block.settings.badge_color
+              %}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+
+      <button class="scroll-btn scroll-right" onclick="scrollSection('productScroller', 1)" aria-label="Scroll right">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading Highlight",
+      "default": "Top Selling"
+    },
+    {
+      "type": "text",
+      "id": "heading_suffix",
+      "label": "Heading Suffix",
+      "default": "Products"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Trending hardware loved by our customers"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View All Link"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Shopify Collection (optional)"
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Max Products",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Image"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Image URL (fallback)",
+          "info": "Use if no image is uploaded"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "Product Name"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category",
+          "default": "Category"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "₹9,999"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare at Price"
+        },
+        {
+          "type": "text",
+          "id": "rating",
+          "label": "Rating",
+          "default": "4.8"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge Text"
+        },
+        {
+          "type": "color",
+          "id": "badge_color",
+          "label": "Badge Color"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

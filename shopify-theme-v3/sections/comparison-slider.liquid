@@ -1,0 +1,96 @@
+{%- comment -%}
+  Comparison Slider — Before/After image comparison
+{%- endcomment -%}
+
+<section class="keyboard-compare animate-on-scroll">
+  <div class="container">
+    <div class="section-header">
+      <h2>
+        {{ section.settings.heading_prefix | default: 'Choose Your' }}
+        <span class="text-gradient">{{ section.settings.heading_highlight | default: 'Aesthetic' }}</span>
+      </h2>
+      <p>{{ section.settings.subtext | default: 'Drag the slider to reveal the Arctic White variant' }}</p>
+    </div>
+
+    <div class="comparison-container" id="monitorComparison">
+      <!-- Background Image -->
+      <div class="comparison-item">
+        {%- if section.settings.background_image != blank -%}
+          <img src="{{ section.settings.background_image | image_url: width: 1200 }}" class="comparison-image" alt="{{ section.settings.bg_label | default: 'Variant B' }}" loading="lazy" />
+        {%- endif -%}
+        <div style="position:absolute;bottom:30px;right:40px;color:var(--accent);background:rgba(0,0,0,0.8);padding:5px 15px;border-radius:20px;font-weight:bold;border:1px solid var(--accent);">
+          {{ section.settings.bg_label | default: 'Pro OLED Variant' }}
+        </div>
+      </div>
+
+      <!-- Overlay Image -->
+      <div class="comparison-overlay" id="comparisonOverlay">
+        {%- if section.settings.overlay_image != blank -%}
+          <img src="{{ section.settings.overlay_image | image_url: width: 1200 }}" class="comparison-image" alt="{{ section.settings.overlay_label | default: 'Variant A' }}" loading="lazy" />
+        {%- endif -%}
+        <div style="position:absolute;bottom:30px;left:40px;color:white;background:rgba(0,0,0,0.8);padding:5px 15px;border-radius:20px;white-space:nowrap;font-weight:bold;border:1px solid rgba(255,255,255,0.2);">
+          {{ section.settings.overlay_label | default: 'Standard LCD Variant' }}
+        </div>
+      </div>
+
+      <div class="comparison-slider" id="comparisonSlider">
+        <div class="slider-handle">
+          <i class="fa-solid fa-arrows-left-right"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparison Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_prefix",
+      "label": "Heading Prefix",
+      "default": "Choose Your"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading Highlight",
+      "default": "Aesthetic"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Drag the slider to reveal the Arctic White variant"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image (Right Side)"
+    },
+    {
+      "type": "text",
+      "id": "bg_label",
+      "label": "Background Label",
+      "default": "Pro OLED Variant"
+    },
+    {
+      "type": "image_picker",
+      "id": "overlay_image",
+      "label": "Overlay Image (Left Side)"
+    },
+    {
+      "type": "text",
+      "id": "overlay_label",
+      "label": "Overlay Label",
+      "default": "Standard LCD Variant"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Slider"
+    }
+  ]
+}
+{% endschema %}

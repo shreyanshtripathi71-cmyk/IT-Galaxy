@@ -1,0 +1,103 @@
+{%- comment -%}
+  Category Scroller — Explore the Ecosystem wide cards
+{%- endcomment -%}
+
+<section class="section-padding animate-on-scroll" style="background: rgba(255, 255, 255, 0.01)">
+  <div class="container">
+    <div class="section-header">
+      <h2>
+        {{ section.settings.heading_prefix | default: 'Explore the' }}
+        <span class="text-gradient glitch-text" data-text="{{ section.settings.heading_highlight }}">
+          {{ section.settings.heading_highlight | default: 'Ecosystem' }}
+        </span>
+      </h2>
+      <p>{{ section.settings.subtext | default: 'Comprehensive hardware selection for professionals and enthusiasts' }}</p>
+    </div>
+
+    <div class="product-scroller-wrapper animate-on-scroll" style="margin-top: 20px">
+      <button class="scroll-btn scroll-left" onclick="scrollSection('categoryScroller', -1)" aria-label="Scroll left">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <div class="product-scroller" id="categoryScroller" style="gap: 20px">
+        {%- for block in section.blocks -%}
+          <div class="wide-cat-card" style="min-width:320px;flex:0 0 auto" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.title }}" loading="lazy" />
+            {%- endif -%}
+            <div class="wide-cat-overlay">
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.subtitle }}</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <button class="scroll-btn scroll-right" onclick="scrollSection('categoryScroller', 1)" aria-label="Scroll right">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category Scroller",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_prefix",
+      "label": "Heading Prefix",
+      "default": "Explore the"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading Highlight",
+      "default": "Ecosystem"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Comprehensive hardware selection for professionals and enthusiasts"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title",
+          "default": "Category"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Description"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Category Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Scroller",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

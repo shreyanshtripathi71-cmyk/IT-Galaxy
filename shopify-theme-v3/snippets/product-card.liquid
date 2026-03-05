@@ -1,0 +1,54 @@
+{%- comment -%}
+  Reusable product card snippet.
+  Usage: {% render 'product-card', product_image: image_url, product_title: title, ... %}
+{%- endcomment -%}
+
+<div class="product-card {{ card_class }}">
+  {%- if badge_text -%}
+    <span class="{% if badge_type == 'flash' %}neon-tag{% else %}product-badge{% endif %}"
+      {% if badge_color %}style="background: {{ badge_color }}; color: {{ badge_text_color | default: '#000' }}"{% endif %}>
+      {{ badge_text }}
+    </span>
+  {%- endif -%}
+
+  <div class="product-img">
+    <img
+      src="{{ product_image }}"
+      alt="{{ product_title | escape }}"
+      loading="lazy"
+      width="400"
+      height="400" />
+
+    {%- unless hide_actions -%}
+      <div class="product-action">
+        <button class="action-btn" title="Quick View" aria-label="Quick view">
+          <i class="fa-regular fa-eye"></i>
+        </button>
+        <button class="action-btn" title="Add to Cart" aria-label="Add to cart"
+          style="background: var(--accent-red); color: white">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </button>
+        <button class="action-btn" title="Wishlist" aria-label="Add to wishlist">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+      </div>
+    {%- endunless -%}
+  </div>
+
+  <div class="product-category">{{ product_category }}</div>
+  <h4 class="product-title">{{ product_title }}</h4>
+
+  <div class="product-bottom">
+    <div class="product-price">
+      {%- if compare_price -%}
+        <del>{{ compare_price }}</del>
+      {%- endif -%}
+      {{ product_price }}
+    </div>
+    {%- if product_rating -%}
+      <div class="product-rating">
+        <i class="fa-solid fa-star"></i> {{ product_rating }}
+      </div>
+    {%- endif -%}
+  </div>
+</div>

@@ -1,0 +1,159 @@
+{%- comment -%}
+  Split Feature — Image + Content side-by-side (Networking, etc.)
+{%- endcomment -%}
+
+<section class="section-padding animate-on-scroll" id="{{ section.settings.section_id }}"
+  style="position:relative;background:var(--bg-secondary);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);">
+  <div class="container" style="position: relative; z-index: 2">
+    <div class="split-section{% if section.settings.reverse %} reverse{% endif %}">
+      <div class="split-image" style="position:relative;border-radius:4px;overflow:hidden;box-shadow:0 0 60px rgba(68,214,44,0.1);">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.heading }}"
+            style="transition:transform 1s;cursor:crosshair"
+            onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy" />
+        {%- endif -%}
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,15,0.8) 0%,transparent 50%);pointer-events:none;"></div>
+
+        {%- if section.settings.overlay_label != blank -%}
+          <div style="position:absolute;bottom:20px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center;">
+            <div style="background:rgba(5,5,15,0.9);padding:8px 20px;border:1px solid var(--accent);color:var(--accent);backdrop-filter:blur(10px);display:flex;align-items:center;gap:10px;font-weight:700;font-family:var(--font-heading);letter-spacing:2px;text-transform:uppercase;font-size:0.75rem;">
+              <i class="{{ section.settings.overlay_icon | default: 'fa-solid fa-satellite-dish' }}"></i>
+              {{ section.settings.overlay_label }}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="split-content">
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">
+          <span class="text-gradient">{{ section.settings.heading_highlight | default: 'Networking' }}</span>
+          {{ section.settings.heading_suffix | default: 'Performance' }}
+        </h2>
+        <p style="margin-bottom:30px;font-size:1.05rem;color:var(--text-muted);line-height:1.8;">
+          {{ section.settings.description }}
+        </p>
+
+        {%- assign feature_blocks = section.blocks | where: 'type', 'feature' -%}
+        {%- if feature_blocks.size > 0 -%}
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:35px;">
+            {%- for block in feature_blocks -%}
+              <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border-color);padding:20px;border-radius:4px;"
+                {{ block.shopify_attributes }}>
+                <i class="{{ block.settings.icon }}" style="color:var(--accent);font-size:1.3rem;margin-bottom:10px;display:block;"></i>
+                <h4 style="font-size:0.95rem;margin-bottom:4px;">{{ block.settings.title }}</h4>
+                <p style="color:var(--text-muted);font-size:0.8rem;">{{ block.settings.description }}</p>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.btn_text != blank -%}
+          <a href="{{ section.settings.btn_link | default: '#' }}" class="btn btn-primary">{{ section.settings.btn_text }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Split Feature",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "networkingSection"
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse",
+      "label": "Reverse Layout (image right)",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Feature Image"
+    },
+    {
+      "type": "text",
+      "id": "overlay_icon",
+      "label": "Overlay Icon Class",
+      "default": "fa-solid fa-satellite-dish"
+    },
+    {
+      "type": "text",
+      "id": "overlay_label",
+      "label": "Overlay Label",
+      "default": "Enterprise Link Active"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading Highlight",
+      "default": "Networking"
+    },
+    {
+      "type": "text",
+      "id": "heading_suffix",
+      "label": "Heading Suffix",
+      "default": "Performance"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Enterprise-grade solutions from TP-Link, Syrotech, Grandstream, MikroTik, and Ubiquiti. Latency-free connectivity optimized for competitive gaming and high-performance workplaces."
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "Shop Networking"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon Class",
+          "default": "fa-solid fa-server"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Wi-Fi 7 Mesh"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Whole-home coverage"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split Feature",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "fa-solid fa-server", "title": "Wi-Fi 7 Mesh", "description": "Whole-home coverage" } },
+        { "type": "feature", "settings": { "icon": "fa-solid fa-shield-halved", "title": "Security", "description": "Enterprise protocols" } },
+        { "type": "feature", "settings": { "icon": "fa-solid fa-gauge-high", "title": "Low Latency", "description": "QoS routing" } },
+        { "type": "feature", "settings": { "icon": "fa-solid fa-network-wired", "title": "Scalable", "description": "Office & data center" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

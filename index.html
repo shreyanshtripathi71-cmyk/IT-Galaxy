@@ -1,0 +1,3956 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT Galaxy | Premium Electronics</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Rajdhani:wght@400;500;600;700&display=swap"
+    rel="stylesheet" media="print" onload="this.media = 'all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Rajdhani:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+  </noscript>
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg-primary: #000000;
+      --bg-secondary: #060606;
+      --bg-card: #0a0a0a;
+      --text-main: #e8e8e8;
+      --text-muted: #777;
+      --accent: #44D62C;
+      --accent-glow: rgba(68, 214, 44, 0.15);
+      --accent-secondary: #00D4FF;
+      --accent-secondary-glow: rgba(0, 212, 255, 0.12);
+      --accent-red: #ff2a2a;
+      --accent-red-glow: rgba(255, 42, 42, 0.15);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --glass-bg: rgba(0, 0, 0, 0.9);
+      --glass-border: rgba(255, 255, 255, 0.06);
+      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --font-main: "Inter", sans-serif;
+      --font-heading: "Rajdhani", sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--font-heading);
+      text-transform: uppercase;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #fff;
+    }
+
+    a {
+      color: var(--text-main);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 4%;
+    }
+
+    .section-padding {
+      padding: 100px 0;
+    }
+
+    /* Hidden gimmick elements */
+    .noise-bg,
+    .perspective-grid,
+    .spotlight,
+    .hyper-aurora-bg,
+    .aurora-orb,
+    .aurora-overlay {
+      display: none !important;
+    }
+
+    /* Scanline overlay for hero */
+    .scanline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(0deg,
+          transparent,
+          transparent 2px,
+          rgba(68, 214, 44, 0.015) 2px,
+          rgba(68, 214, 44, 0.015) 4px);
+      z-index: 1;
+      pointer-events: none;
+      animation: scanlineMove 8s linear infinite;
+    }
+
+    @keyframes scanlineMove {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 0 100px;
+      }
+    }
+
+    .text-gradient {
+      color: var(--accent) !important;
+      -webkit-text-fill-color: var(--accent) !important;
+      background: none !important;
+    }
+
+    /* Animations — subtle only */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .glitch-text {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Header / Navbar */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: #000000;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      background: #000000;
+      box-shadow: 0 1px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 4%;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo:hover {
+      opacity: 0.8;
+    }
+
+    .logo i {
+      color: var(--accent);
+      font-size: 1.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      position: relative;
+      padding-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .elite-tabs {
+      margin-bottom: 50px !important;
+    }
+
+    .elite-tabs button {
+      border-radius: 0 !important;
+      padding: 10px 28px !important;
+      font-size: 0.85rem !important;
+      text-transform: uppercase !important;
+      letter-spacing: 1px !important;
+      background: transparent !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+      color: var(--text-muted) !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .elite-tabs button:hover:not(.btn-primary) {
+      border-color: rgba(255, 255, 255, 0.4) !important;
+      color: #fff !important;
+    }
+
+    .elite-tabs button.btn-primary {
+      background: var(--accent) !important;
+      border-color: var(--accent) !important;
+      color: #000 !important;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .nav-icons i {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .nav-icons i:hover {
+      color: #fff;
+    }
+
+    .cart-icon {
+      position: relative;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: var(--accent);
+      color: #000;
+      font-size: 0.65rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+    }
+
+    .mega-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: rgba(13, 13, 13, 0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 35px 5%;
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    /* Hide cloud/fog effects */
+    .header-clouds,
+    .header-clouds-2 {
+      display: none !important;
+    }
+
+    .mega-menu.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scaleY(1);
+    }
+
+    .mega-menu-content {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      width: 100%;
+      max-width: 1200px;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition-delay: 0.1s;
+    }
+
+    .mega-menu.active .mega-menu-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mega-menu-column {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      min-width: 150px;
+    }
+
+    .mega-menu-title {
+      font-size: 1.1rem;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      font-family: "Rajdhani", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .mega-menu-column a {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .mega-menu-column a:hover {
+      color: var(--accent);
+      transform: translateX(5px);
+    }
+
+    .mega-menu-promo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 250px;
+      margin-left: 30px;
+    }
+
+    .mega-menu-promo img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 70px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translateX(-50%) translateY(-50%);
+      z-index: -2;
+      object-fit: cover;
+      filter: brightness(0.4) contrast(1.2) saturate(1.1);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom,
+          rgba(0, 0, 0, 0.6) 0%,
+          rgba(0, 0, 0, 0.3) 40%,
+          rgba(0, 0, 0, 0.5) 60%,
+          rgba(0, 0, 0, 0.95) 90%,
+          #000 100%);
+      z-index: -1;
+    }
+
+    /* Scanline is now visible */
+    .hero-vignette {
+      display: none !important;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .hero-text h1 {
+      font-size: 5rem;
+      margin-bottom: 24px;
+      animation: fadeIn 1s ease-out forwards;
+      letter-spacing: -2px;
+      line-height: 1.05;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 40px;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeIn 1s ease-out 0.2s forwards;
+      opacity: 0;
+      line-height: 1.7;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 38px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+      font-family: var(--font-heading);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      box-shadow: 0 0 30px rgba(68, 214, 44, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      background: #55e63d;
+      box-shadow: 0 8px 40px rgba(68, 214, 44, 0.5);
+    }
+
+    .btn-secondary,
+    .btn-outline {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-secondary:hover,
+    .btn-outline:hover {
+      border-color: rgba(255, 255, 255, 0.6);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-3px);
+    }
+
+    .hero-image {
+      position: relative;
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 650px;
+      height: auto;
+      object-fit: contain;
+      animation: float 6s ease-in-out infinite;
+      filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.8));
+    }
+
+    /* Logo Marquee - Infinite Scroll */
+    .logo-marquee-section {
+      padding: 45px 0;
+      overflow: hidden;
+      position: relative;
+      background: transparent;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .logo-marquee-track {
+      display: flex;
+      width: max-content;
+      animation: logoScroll 30s linear infinite;
+    }
+
+    .logo-marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    .logo-marquee-slide {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      padding: 0 30px;
+    }
+
+    .logo-marquee-slide img {
+      height: 70px;
+      width: auto;
+      max-width: 160px;
+      object-fit: contain;
+      filter: brightness(0.75) grayscale(60%);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .logo-marquee-slide img:hover {
+      filter: brightness(1) grayscale(0%);
+      opacity: 1;
+    }
+
+    @keyframes logoScroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Categories Section - Futuristic Cards */
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #fff;
+      /* Override any gradient text */
+      -webkit-text-fill-color: unset;
+    }
+
+    .section-header h2 .text-gradient {
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-header h2::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -10px;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-top: 15px;
+    }
+
+    .category-scroller-wrapper {
+      position: relative;
+      margin-top: 20px;
+      contain: layout style;
+      /* Rendering Containers */
+    }
+
+    .category-scroller {
+      display: flex;
+      gap: 40px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      /* Firefox */
+      padding: 20px 4% 20px 4%;
+      /* Allow breakout but align start position */
+      perspective: 1200px;
+      animation: categoryScroll 60s linear infinite;
+      /* Optimize Marquees */
+    }
+
+    .category-scroller:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes categoryScroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+
+      /* Scrolls one full length for seamless loop */
+    }
+
+    .category-scroller::-webkit-scrollbar {
+      display: none;
+      /* Chrome/Safari */
+    }
+
+    .category-card {
+      position: relative;
+      flex: 0 0 auto;
+      width: 380px;
+      border-radius: 4px;
+      overflow: hidden;
+      height: 450px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .category-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top,
+          rgba(0, 0, 0, 0.85) 0%,
+          rgba(0, 0, 0, 0.1) 100%);
+      z-index: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .category-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .category-info {
+      position: absolute;
+      bottom: 35px;
+      left: 30px;
+      z-index: 2;
+    }
+
+    .category-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .category-info p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+    }
+
+    .category-card:hover .category-info p {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Amazon Style Horizontal Product Scroller */
+    .product-scroller-wrapper {
+      position: relative;
+      contain: layout style;
+      /* Rendering Containers */
+    }
+
+    .product-scroller {
+      display: flex;
+      gap: 25px;
+      overflow-x: auto;
+      padding: 20px 4% 40px 4%;
+      /* Align start position, free flow everything else */
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    .product-scroller::-webkit-scrollbar {
+      display: none;
+      /* Chrome/Safari */
+    }
+
+    .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--glass-bg);
+      border: 1px solid var(--border-color);
+      color: white;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+      transition: var(--transition);
+    }
+
+    .scroll-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+    }
+
+    .scroll-left {
+      left: -25px;
+    }
+
+    .scroll-right {
+      right: -25px;
+    }
+
+    .product-card {
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 0;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex: 0 0 calc(16.666% - 21px);
+      min-width: 260px;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Remove sweeping light and glass flare */
+    .product-card::before,
+    .product-card::after {
+      display: none !important;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--accent);
+      color: #000;
+      font-size: 0.6rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      z-index: 3;
+      letter-spacing: 1px;
+      font-family: var(--font-heading);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
+      position: relative;
+      z-index: 2;
+    }
+
+    .product-img img {
+      max-width: 85%;
+      max-height: 85%;
+      object-fit: contain;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-img img {
+      transform: scale(1.08);
+    }
+
+    .product-action {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: all 0.3s ease;
+    }
+
+    .product-card:hover .product-action {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .action-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.2s;
+      font-size: 0.75rem;
+    }
+
+    .action-btn:hover {
+      background: white;
+      color: #000;
+      border-color: white;
+    }
+
+    .product-info {
+      padding: 16px 18px 0;
+    }
+
+    .product-category {
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.35);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      padding: 16px 18px 0 18px;
+    }
+
+    .product-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 2.7em;
+      padding: 0 18px;
+    }
+
+    .product-bottom {
+      margin-top: auto;
+      padding: 14px 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .product-price {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .product-price del {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.3);
+      margin-right: 8px;
+      font-weight: 400;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: #ffb800;
+      font-size: 0.75rem;
+    }
+
+    /* Call to Action Banner */
+    .cta-section {
+      padding: 80px 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-content {
+      flex: 1;
+      max-width: 600px;
+    }
+
+    .cta-content h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .cta-content p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+
+    .cta-image {
+      flex: 1;
+      text-align: right;
+    }
+
+    .cta-image img {
+      max-width: 80%;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+    }
+
+    /* Footer */
+    footer {
+      background: #080808;
+      padding: 80px 0 30px 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-about p {
+      color: var(--text-muted);
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-color);
+    }
+
+    .social-icons a:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+      transform: translateY(-3px);
+    }
+
+    .footer-links h4 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+      padding-left: 5px;
+    }
+
+    .newsletter input {
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: white;
+      margin-bottom: 15px;
+      font-family: inherit;
+    }
+
+    .newsletter input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .newsletter button {
+      width: 100%;
+      padding: 15px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: black;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .newsletter button:hover {
+      background: #55e63d;
+      box-shadow: 0 0 25px var(--accent-glow);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .payment-icons {
+      display: flex;
+      gap: 15px;
+      font-size: 1.5rem;
+      opacity: 0.7;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
+      }
+
+      .hero-text p {
+        margin: 0 auto 30px auto;
+      }
+
+      .btn-outline {
+        margin-left: 10px;
+        margin-top: 15px;
+      }
+
+      .cta-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        /* In a real app, add a hamburger menu */
+      }
+
+      .hero-text h1 {
+        font-size: 3rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+    .flash-deals-section {
+      background: linear-gradient(175deg, #080808 0%, #0a0a0a 40%, #060808 100%);
+      padding: 80px 0;
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid rgba(68, 214, 44, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .flash-deals-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(68, 214, 44, 0.3), transparent);
+    }
+
+    .flash-deals-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 40px;
+    }
+
+    .countdown-timer {
+      display: flex;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 14px 20px;
+      border-radius: 0;
+      border: 1px solid rgba(68, 214, 44, 0.2);
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
+
+    .countdown-timer::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      right: 14px;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: livePulse 1.5s ease-in-out infinite;
+    }
+
+    .countdown-timer::after {
+      content: 'LIVE';
+      position: absolute;
+      top: -20px;
+      right: 24px;
+      font-size: 0.55rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      font-family: var(--font-heading);
+    }
+
+    @keyframes livePulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(68, 214, 44, 0.5);
+      }
+
+      50% {
+        opacity: 0.6;
+        box-shadow: 0 0 8px 3px rgba(68, 214, 44, 0.3);
+      }
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 50px;
+      background: rgba(68, 214, 44, 0.05);
+      padding: 6px 10px;
+      border: 1px solid rgba(68, 214, 44, 0.1);
+    }
+
+    .countdown-val {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: white;
+      font-family: var(--font-heading);
+      line-height: 1;
+    }
+
+    .countdown-label {
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 1px;
+      margin-top: 2px;
+      font-family: var(--font-heading);
+    }
+
+    .flash-card {
+      background: #0e0e0e !important;
+      border-color: rgba(255, 255, 255, 0.05) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    .flash-card:hover {
+      border-color: rgba(255, 255, 255, 0.12) !important;
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
+    }
+
+    .flash-card::before {
+      display: none !important;
+    }
+
+    .neon-tag {
+      background: #ff1a1a;
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-family: var(--font-heading);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* Split Section Layout (Networking, Featured Collection) */
+    .split-section {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      margin-bottom: 100px;
+      contain: layout style;
+      /* Rendering Containers */
+    }
+
+    .split-image {
+      flex: 1;
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      min-height: 500px;
+    }
+
+    .split-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .split-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .split-content {
+      flex: 1;
+    }
+
+    .split-section.reverse {
+      flex-direction: row-reverse;
+    }
+
+    /* Wide Categories Card Grid */
+    .wide-categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 50px;
+      contain: layout style;
+      /* Rendering Containers */
+    }
+
+    .wide-cat-card {
+      position: relative;
+      height: 400px;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .wide-cat-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.7s ease;
+    }
+
+    .wide-cat-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top,
+          rgba(0, 0, 0, 0.9) 0%,
+          transparent 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 40px;
+      transition: all 0.5s ease;
+    }
+
+    .wide-cat-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .wide-cat-card:hover .wide-cat-overlay {
+      background: linear-gradient(to top,
+          rgba(68, 214, 44, 0.12) 0%,
+          transparent 80%);
+    }
+
+    .wide-cat-card h3 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    /* Custom Icon Marquee (at end) */
+    .icon-marquee-section {
+      padding: 50px 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    .icon-marquee-inner {
+      display: flex;
+      gap: 80px;
+      animation: scrollIcons 25s linear infinite;
+      width: max-content;
+    }
+
+    .icon-marquee-inner:hover {
+      animation-play-state: paused;
+    }
+
+    .icon-item {
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      white-space: nowrap;
+      transition: color 0.3s ease;
+      letter-spacing: 3px;
+      font-weight: 600;
+    }
+
+    .icon-item:hover {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    @keyframes scrollIcons {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Keyboard Comparison Section */
+    .keyboard-compare {
+      padding: 100px 0;
+      background: #000;
+      contain: layout style;
+      /* Rendering Containers */
+    }
+
+    .comparison-container {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      height: 600px;
+      margin: 50px auto 0;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .comparison-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .comparison-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .comparison-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      /* Starts showing half */
+      height: 100%;
+      overflow: hidden;
+      border-right: 4px solid white;
+      z-index: 2;
+    }
+
+    .comparison-overlay .comparison-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1200px;
+      /* Match container width */
+      height: 100%;
+      max-width: none;
+    }
+
+    .comparison-slider {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: white;
+      cursor: ew-resize;
+      z-index: 10;
+      transform: translateX(-50%);
+    }
+
+    .slider-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      font-size: 1.2rem;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+      pointer-events: none;
+    }
+
+    @media (max-width: 968px) {
+      .wide-categories-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .split-section,
+      .split-section.reverse {
+        flex-direction: column;
+      }
+
+      .comparison-container {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .wide-categories-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Immersive Enhancements */
+    .hero-vignette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, transparent 20%, #000 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Bento Grid Style */
+    .bento-grid {
+      display: grid;
+      grid-template-areas:
+        "main main side1"
+        "main main side2"
+        "bottom bottom bottom";
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 250px 250px auto;
+      gap: 25px;
+      margin-top: 50px;
+      contain: layout style;
+      /* Rendering Containers */
+    }
+
+    .bento-card {
+      background: #060606;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 0;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      transition: all 0.4s ease;
+    }
+
+    .bento-card:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+    }
+
+    .bento-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      opacity: 0.7;
+      transition: var(--transition);
+    }
+
+    .bento-card:hover img {
+      transform: scale(1.1);
+      opacity: 0.4;
+    }
+
+    .bento-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .bento-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .bento-card.wide {
+      padding: 40px;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    /* Radar UI Effect */
+    .tech-radar {
+      width: 120px;
+      height: 120px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      position: relative;
+      background: rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .radar-line {
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          transparent,
+          var(--accent-glow));
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform-origin: left center;
+      animation: radarRotate 3s linear infinite;
+    }
+
+    @keyframes radarRotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Advanced Hover - Magnetic/3D feel */
+    .magnetic-wrap {
+      display: inline-block;
+      transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    @media (max-width: 968px) {
+      .bento-grid {
+        grid-template-areas:
+          "main main"
+          "side1 side2"
+          "bottom bottom";
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+      }
+    }
+
+    @keyframes sweepRefresh {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    /* 360 Feature Brands Redesign - Neon Glass Grid */
+
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: #25d366;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+      z-index: 10000;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .floating-whatsapp:hover {
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.6);
+      color: white;
+    }
+
+    .whatsapp-tooltip {
+      position: absolute;
+      right: 75px;
+      top: 50%;
+      transform: translateY(-50%) translateX(20px);
+      background: rgba(10, 10, 20, 0.9);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(68, 214, 44, 0.3);
+    }
+
+    .floating-whatsapp:hover .whatsapp-tooltip {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+
+    .sales-popup {
+      position: fixed;
+      bottom: -100px;
+      left: 30px;
+      background: rgba(10, 10, 20, 0.9);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(68, 214, 44, 0.2);
+      border-radius: 4px;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(68, 214, 44, 0.05);
+      z-index: 9999;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .sales-popup.show {
+      bottom: 30px;
+      opacity: 1;
+    }
+
+    .sales-popup-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sales-popup-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin: 0;
+      color: #f8f9fa;
+    }
+
+    .sales-popup-action {
+      font-size: 0.8rem;
+      margin: 0;
+      color: #a0aab5;
+    }
+
+    .sales-popup-time {
+      font-size: 0.7rem;
+      margin: 0;
+      color: #44D62C;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="noise-bg"></div>
+  <div class="perspective-grid" id="gridBg"></div>
+  <div class="spotlight" id="spotlight"></div>
+
+  <!-- Header Navigation -->
+  <header id="header">
+    <!-- Scrolling Mist/Clouds under the header -->
+    <div class="header-clouds"></div>
+    <div class="header-clouds-2"></div>
+
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <i class="fa-solid fa-atom"></i> IT Galaxy
+      </a>
+      <ul class="nav-links" id="mainNav">
+        <li data-menu="home"><a href="#">Home</a></li>
+        <li data-menu="accessories"><a href="#">Accessories</a></li>
+        <li data-menu="monitors"><a href="#">Monitors</a></li>
+        <li data-menu="laptops"><a href="#">Laptops</a></li>
+        <li data-menu="spares"><a href="#">Spares</a></li>
+        <li data-menu="networking"><a href="#">Networking</a></li>
+        <li data-menu="printers"><a href="#">Printers</a></li>
+        <li data-menu="surveillance"><a href="#">Surveillance</a></li>
+      </ul>
+      <div class="nav-icons">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-regular fa-user"></i>
+        <div class="cart-icon">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-badge">3</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tesla Style Mega Menu -->
+    <div class="mega-menu" id="megaMenu">
+      <div class="mega-menu-content" id="megaContent">
+        <!-- Content gets injected via JS -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="https://cdn.shopify.com/videos/c/o/v/a53e81accf244f1f9c2f049dcca45e8a.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="scanline"></div>
+    <div class="hero-vignette"></div>
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h1>
+          Powering Your <br /><span class="text-gradient">Digital Universe</span>
+        </h1>
+        <p>
+          Premium laptops, PC components and electronics delivered across
+          India with speed, security and trust.
+        </p>
+        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+          <a href="#" class="btn btn-primary">Explore Products</a>
+          <a href="#" class="btn btn-outline">View Deals</a>
+        </div>
+        <div
+          style="display: flex; gap: 28px; align-items: center; justify-content: center; margin-top: 40px; font-size: 0.78rem; color: rgba(255,255,255,0.45); letter-spacing: 0.5px; flex-wrap: wrap;">
+          <span><i class="fa-solid fa-circle-check" style="color: rgba(255,255,255,0.35); margin-right: 6px;"></i>100%
+            Genuine</span>
+          <span><i class="fa-solid fa-file-invoice" style="color: rgba(255,255,255,0.35); margin-right: 6px;"></i>GST
+            Invoices</span>
+          <span><i class="fa-solid fa-truck-fast"
+              style="color: rgba(255,255,255,0.35); margin-right: 6px;"></i>Pan-India Dispatch</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logo Marquee -->
+  <section class="logo-marquee-section">
+    <div class="logo-marquee-track">
+      <div class="logo-marquee-slide">
+        <img src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/images_3.avif?v=1772422424" alt="Brand" />
+        <img
+          src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/images_3_9ed6e77a-656c-4fbc-9418-986c8f0bfe47.avif?v=1772422423"
+          alt="Brand" />
+        <img src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/images_2_1.avif?v=1772422424" alt="Brand" />
+        <img src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/images_1_1.avif?v=1772422423" alt="Brand" />
+        <img src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/channels4_profile.avif?v=1772422423"
+          alt="Brand" />
+        <img
+          src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/images_4_a97d328c-d19c-48cb-81d9-c51ebb46b540.webp?v=1772422424"
+          alt="Brand" />
+        <img
+          src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/35c6b716b78f88aa46def43642f02b35.avif?v=1772422423"
+          alt="Brand" />
+        <img
+          src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/hp-brand-logo-laptop-symbol-blue-design-usa-computer-illustration-with-black-background-free-vector.avif?v=1772422424"
+          alt="Brand" />
+        <img src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/maxresdefault.avif?v=1772422423" alt="Brand" />
+        <img src="shopify-theme-v3/assets/Dell_Logo.svg-removebg-preview.png" alt="Dell" />
+        <img src="shopify-theme-v3/assets/images__4_-removebg-preview.png" alt="Brand" />
+        <img
+          src="shopify-theme-v3/assets/png-clipart-logo-benq-brand-multimedia-projectors-projector-purple-electronics-removebg-preview.png"
+          alt="BenQ" />
+      </div>
+      <div class="logo-marquee-slide">
+        <img src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/images_3.avif?v=1772422424" alt="Brand" />
+        <img
+          src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/images_3_9ed6e77a-656c-4fbc-9418-986c8f0bfe47.avif?v=1772422423"
+          alt="Brand" />
+        <img src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/images_2_1.avif?v=1772422424" alt="Brand" />
+        <img src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/images_1_1.avif?v=1772422423" alt="Brand" />
+        <img src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/channels4_profile.avif?v=1772422423"
+          alt="Brand" />
+        <img
+          src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/images_4_a97d328c-d19c-48cb-81d9-c51ebb46b540.webp?v=1772422424"
+          alt="Brand" />
+        <img
+          src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/35c6b716b78f88aa46def43642f02b35.avif?v=1772422423"
+          alt="Brand" />
+        <img
+          src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/hp-brand-logo-laptop-symbol-blue-design-usa-computer-illustration-with-black-background-free-vector.avif?v=1772422424"
+          alt="Brand" />
+        <img src="https://cdn.shopify.com/s/files/1/0651/7535/5486/files/maxresdefault.avif?v=1772422423" alt="Brand" />
+        <img src="shopify-theme-v3/assets/Dell_Logo.svg-removebg-preview.png" alt="Dell" />
+        <img src="shopify-theme-v3/assets/images__4_-removebg-preview.png" alt="Brand" />
+        <img
+          src="shopify-theme-v3/assets/png-clipart-logo-benq-brand-multimedia-projectors-projector-purple-electronics-removebg-preview.png"
+          alt="BenQ" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Amazon Style Scroller - Top Selling -->
+  <section class="section-padding" style="padding-top: 80px; overflow-x: hidden">
+    <div class="container">
+      <div class="section-header animate-on-scroll" style="
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+          ">
+        <div>
+          <h2 style="font-size: 2.5rem;"><span class="text-gradient">Top Selling</span> Products</h2>
+          <p>Trending hardware loved by our customers</p>
+        </div>
+        <a href="#" style="color: var(--accent); font-weight: 600">View All <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="product-scroller-wrapper animate-on-scroll" style="margin-top: 20px">
+        <button class="scroll-btn scroll-left" onclick="scrollProducts(-1)">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="product-scroller" id="productScroller">
+          <!-- Product 1 -->
+          <div class="product-card">
+            <span class="product-badge">Sale</span>
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                alt="Keyboard" />
+              <div class="product-action">
+                <button class="action-btn" title="Quick View">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+                <button class="action-btn" title="Add to Cart" style="background: var(--accent-red); color: white">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button class="action-btn" title="Wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-category">Peripherals</div>
+            <h4 class="product-title">Mechanical RGB Gaming Keyboard Pro</h4>
+            <div class="product-bottom">
+              <div class="product-price"><del>₹12,999</del> ₹8,499</div>
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i> 4.8
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                alt="Headset" />
+              <div class="product-action">
+                <button class="action-btn">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+                <button class="action-btn" style="background: var(--accent-red); color: white">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button class="action-btn">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-category">Audio</div>
+            <h4 class="product-title">Wireless Noise Cancelling Headset 7.1</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹14,200</div>
+              <div style="color: #ffb800; font-size: 0.8rem">
+                <i class="fa-solid fa-star"></i> 4.9
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card">
+            <span class="product-badge" style="background: var(--accent); color: black">New</span>
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1625842268584-8f3296236761?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                alt="Mouse" />
+              <div class="product-action">
+                <button class="action-btn">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+                <button class="action-btn" style="background: var(--accent-red); color: white">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button class="action-btn">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-category">Mice</div>
+            <h4 class="product-title">
+              Ultra-Lightweight Wireless Gaming Mouse
+            </h4>
+            <div class="product-bottom">
+              <div class="product-price">₹6,999</div>
+              <div style="color: #ffb800; font-size: 0.8rem">
+                <i class="fa-solid fa-star"></i> 4.7
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1600003014794-cfd82e9714af?auto=format&fit=crop&w=400&q=80"
+                alt="Controller" />
+              <div class="product-action">
+                <button class="action-btn">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+                <button class="action-btn" style="background: var(--accent-red); color: white">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button class="action-btn">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-category">Accessories</div>
+            <h4 class="product-title">
+              Pro Wireless Gaming Controller - Elite Edition
+            </h4>
+            <div class="product-bottom">
+              <div class="product-price"><del>₹5,999</del> ₹4,499</div>
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i> 4.5
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1597872200370-496de2c1a82b?auto=format&fit=crop&w=400&q=80"
+                alt="SSD" />
+              <div class="product-action">
+                <button class="action-btn">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+                <button class="action-btn" style="background: var(--accent-red); color: white">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button class="action-btn">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-category">Components</div>
+            <h4 class="product-title">
+              2TB NVMe M.2 Gen4 SSD - Black Titanium
+            </h4>
+            <div class="product-bottom">
+              <div class="product-price">₹18,500</div>
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i> 5.0
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 6 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                alt="Monitor" />
+              <div class="product-action">
+                <button class="action-btn">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+                <button class="action-btn" style="background: var(--accent-red); color: white">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button class="action-btn">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-category">Monitors</div>
+            <h4 class="product-title">27" 1440p 165Hz IPS Gaming Monitor</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹28,999</div>
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i> 4.8
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 7 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                alt="Motherboard" />
+              <div class="product-action">
+                <button class="action-btn">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+                <button class="action-btn" style="background: var(--accent-red); color: white">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button class="action-btn">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-category">Components</div>
+            <h4 class="product-title">Z790 Elite AX DDR5 Motherboard</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹24,500</div>
+              <div style="color: #ffb800; font-size: 0.8rem">
+                <i class="fa-solid fa-star"></i> 4.9
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 8 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1626218174358-7769486c4b79?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                alt="RAM" />
+              <div class="product-action">
+                <button class="action-btn">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+                <button class="action-btn" style="background: var(--accent-red); color: white">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button class="action-btn">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-category">Memory</div>
+            <h4 class="product-title">32GB (2x16GB) DDR5 6000MHz RGB</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹12,499</div>
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i> 4.8
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 9 -->
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                alt="Router" />
+              <div class="product-action">
+                <button class="action-btn">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+                <button class="action-btn" style="background: var(--accent-red); color: white">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button class="action-btn">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-category">Networking</div>
+            <h4 class="product-title">AX6000 Wi-Fi 6 Gaming Router</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹16,999</div>
+              <div style="color: #ffb800; font-size: 0.8rem">
+                <i class="fa-solid fa-star"></i> 4.7
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 10 -->
+          <div class="product-card">
+            <span class="product-badge" style="background: var(--accent); color: black">Top</span>
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                alt="GPU" />
+              <div class="product-action">
+                <button class="action-btn">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+                <button class="action-btn" style="background: var(--accent-red); color: white">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button class="action-btn">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-category">Graphics Cards</div>
+            <h4 class="product-title">GeForce RTX 4080 Super 16GB</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹1,15,999</div>
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i> 4.9
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="scroll-btn scroll-right" onclick="scrollProducts(1)">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flash Deals Section -->
+  <section class="flash-deals-section animate-on-scroll">
+    <div class="container">
+      <div class="flash-deals-header">
+        <div>
+          <h2 style="font-size: 2.5rem; margin-bottom: 8px;">
+            <span class="text-gradient">Flash Deals</span> Exclusive
+          </h2>
+          <p style="color: var(--text-muted); font-size: 1rem;">Limited quantity offers on pro hardware</p>
+        </div>
+        <div class="countdown-timer">
+          <div class="countdown-item">
+            <span class="countdown-val">08</span>
+            <span class="countdown-label">Hrs</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-val">42</span>
+            <span class="countdown-label">Min</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-val">15</span>
+            <span class="countdown-label">Sec</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-scroller-wrapper animate-on-scroll" style="margin-top: 20px">
+        <button class="scroll-btn scroll-left" onclick="scrollFlashDeals(-1)">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="product-scroller" id="flashScroller">
+          <!-- Flash Deal Base Cards x 12  -->
+          <div class="product-card flash-card">
+            <span class="neon-tag">-35%</span>
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=400&q=80"
+                alt="CPU" />
+            </div>
+            <div class="product-category">Processors</div>
+            <h4 class="product-title">
+              Core Ultra 9 285K - Unleashed Edition
+            </h4>
+            <div class="product-bottom">
+              <div class="product-price">₹52,499 <del>₹68,000</del></div>
+            </div>
+          </div>
+          <div class="product-card flash-card">
+            <span class="neon-tag">FLASH</span>
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1555617766-c94804975da3?auto=format&fit=crop&w=400&q=80"
+                alt="CPU" />
+            </div>
+            <div class="product-category">Processors</div>
+            <h4 class="product-title">
+              Ryzen 9 9950X - Extreme Core 16C/32T
+            </h4>
+            <div class="product-bottom">
+              <div class="product-price">₹64,999 <del>₹75,000</del></div>
+            </div>
+          </div>
+          <div class="product-card flash-card">
+            <span class="neon-tag">HOT</span>
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=400&q=80"
+                alt="Motherboard" />
+            </div>
+            <div class="product-category">Components</div>
+            <h4 class="product-title">
+              ROG Maximus Z790 Hero - Carbon Black
+            </h4>
+            <div class="product-bottom">
+              <div class="product-price">₹48,999 <del>₹55,000</del></div>
+            </div>
+          </div>
+          <div class="product-card flash-card">
+            <span class="neon-tag">-20%</span>
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=400&q=80"
+                alt="GPU" />
+            </div>
+            <div class="product-category">Graphics Cards</div>
+            <h4 class="product-title">RTX 4090 OC Edition 24GB VRAM</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹1,75,000 <del>₹2,05,000</del></div>
+            </div>
+          </div>
+          <div class="product-card flash-card">
+            <span class="neon-tag">LIVE</span>
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=400&q=80"
+                alt="Component" />
+            </div>
+            <div class="product-category">Processors</div>
+            <h4 class="product-title">Core i9-14900KS - Limited Raptor</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹58,000 <del>₹72,000</del></div>
+            </div>
+          </div>
+
+          <!-- Duplicated Items for 12 Tabs requirement -->
+          <div class="product-card flash-card">
+            <span class="neon-tag">-15%</span>
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=400&q=80"
+                alt="Motherboard" />
+            </div>
+            <div class="product-category">Components</div>
+            <h4 class="product-title">B650E AORUS Master</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹32,499 <del>₹36,000</del></div>
+            </div>
+          </div>
+          <div class="product-card flash-card">
+            <span class="neon-tag">FLASH</span>
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=400&q=80"
+                alt="CPU" />
+            </div>
+            <div class="product-category">Memory</div>
+            <h4 class="product-title">Corsair Dominator Titanium 48GB</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹28,500 <del>₹35,000</del></div>
+            </div>
+          </div>
+          <div class="product-card flash-card">
+            <span class="neon-tag">HOT</span>
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1555617766-c94804975da3?auto=format&fit=crop&w=400&q=80"
+                alt="CPU" />
+            </div>
+            <div class="product-category">Storage</div>
+            <h4 class="product-title">Samsung 990 PRO 4TB Heatsink</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹34,999 <del>₹42,000</del></div>
+            </div>
+          </div>
+          <div class="product-card flash-card">
+            <span class="neon-tag">-10%</span>
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=400&q=80"
+                alt="GPU" />
+            </div>
+            <div class="product-category">Graphics Cards</div>
+            <h4 class="product-title">RX 7900 XTX Nitro+</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹95,000 <del>₹110,000</del></div>
+            </div>
+          </div>
+          <div class="product-card flash-card">
+            <span class="neon-tag">LIVE</span>
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=400&q=80"
+                alt="Component" />
+            </div>
+            <div class="product-category">Cooling</div>
+            <h4 class="product-title">NZXT Kraken Elite 360 RGB</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹22,000 <del>₹27,000</del></div>
+            </div>
+          </div>
+          <div class="product-card flash-card">
+            <span class="neon-tag">HOT</span>
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=400&q=80"
+                alt="Case" />
+            </div>
+            <div class="product-category">Chassis</div>
+            <h4 class="product-title">Hyte Y70 Touch Infinite Display</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹38,000 <del>₹45,000</del></div>
+            </div>
+          </div>
+          <div class="product-card flash-card">
+            <span class="neon-tag">-30%</span>
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1555617766-c94804975da3?auto=format&fit=crop&w=400&q=80"
+                alt="PSU" />
+            </div>
+            <div class="product-category">Power Supply</div>
+            <h4 class="product-title">Seasonic Vertex GX-1200 80+ Gold</h4>
+            <div class="product-bottom">
+              <div class="product-price">₹24,500 <del>₹32,000</del></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="scroll-btn scroll-right" onclick="scrollFlashDeals(1)">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bento Grid Tech Showcase (Monitors) -->
+  <section class="section-padding" style="background: #000">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2><span class="text-gradient">Engineered</span> for Excellence</h2>
+        <p>
+          Uncompromising visual fidelity from the world's leading monitor
+          brands.
+        </p>
+        <div style="
+              display: flex;
+              gap: 12px;
+              justify-content: center;
+              margin-top: 20px;
+              flex-wrap: wrap;
+            ">
+          <span
+            style="padding: 5px 16px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.6); font-family: var(--font-heading);">Dell</span>
+          <span
+            style="padding: 5px 16px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.6); font-family: var(--font-heading);">HP</span>
+          <span
+            style="padding: 5px 16px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.6); font-family: var(--font-heading);">Lenovo</span>
+          <span
+            style="padding: 5px 16px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.6); font-family: var(--font-heading);">BenQ</span>
+          <span
+            style="padding: 5px 16px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.6); font-family: var(--font-heading);">Acer</span>
+          <span
+            style="padding: 5px 16px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.6); font-family: var(--font-heading);">MSI</span>
+          <span
+            style="padding: 5px 16px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.6); font-family: var(--font-heading);">Samsung</span>
+        </div>
+      </div>
+      <div class="bento-grid">
+        <div class="bento-card large animate-on-scroll" style="grid-area: main">
+          <img src="https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=800&q=80"
+            alt="Monitor" />
+          <div class="bento-content">
+            <h3>Odyssey OLED G9</h3>
+            <p>49" Curved Dual QHD 240Hz.</p>
+          </div>
+        </div>
+        <div class="bento-card animate-on-scroll" style="
+              grid-area: side1;
+              background: linear-gradient(45deg, #120a1a, #0a0a12);
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+            ">
+          <i class="fa-solid fa-eye" style="
+                font-size: 3rem;
+                color: var(--accent);
+                margin-bottom: 15px;
+              "></i>
+          <h3>IPS Black</h3>
+          <p>True 2000:1 Contrast.</p>
+        </div>
+        <div class="bento-card animate-on-scroll" style="grid-area: side2">
+          <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=400&q=80"
+            alt="Monitor Component" style="opacity: 0.5" />
+          <div class="bento-content">
+            <h3>8K Ready</h3>
+            <p>Creator displays.</p>
+          </div>
+        </div>
+        <!-- Quantum Speed / Refresh Rate Animation -->
+        <div class="bento-card wide animate-on-scroll" style="grid-area: bottom; overflow: hidden; position: relative">
+          <div class="refresh-rate-bg" style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                  90deg,
+                  transparent,
+                  rgba(0, 210, 255, 0.1),
+                  transparent
+                );
+                animation: sweepRefresh 2s linear infinite;
+              "></div>
+          <div style="
+                display: flex;
+                gap: 40px;
+                align-items: center;
+                position: relative;
+                z-index: 2;
+              ">
+            <div style="flex: 1">
+              <h3>
+                <span style="color: var(--accent)">500Hz</span> Refresh
+                Rate
+              </h3>
+              <p>0.03ms Response time for competitive esports superiority.</p>
+            </div>
+            <style>
+              @keyframes freefallBounce {
+                0% {
+                  transform: translate(0, 0);
+                }
+
+                25% {
+                  transform: translate(40px, -20px);
+                }
+
+                50% {
+                  transform: translate(20px, 40px);
+                }
+
+                75% {
+                  transform: translate(-30px, 10px);
+                }
+
+                100% {
+                  transform: translate(0, 0);
+                }
+              }
+            </style>
+            <div class="tech-radar" style="position: relative; width: 60px; height: 60px">
+              <i class="fa-solid fa-bolt" style="
+                    font-size: 2rem;
+                    color: var(--accent);
+                    position: absolute;
+                    animation: freefallBounce 4s ease-in-out infinite alternate;
+                  "></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Networking Section (TP-Link Focus) -->
+  <section class="section-padding animate-on-scroll" id="networkingSection"
+    style="position: relative; background: var(--bg-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container" style="position: relative; z-index: 2">
+      <div class="split-section">
+        <div class="split-image" style="
+              position: relative;
+              border-radius: 4px;
+              overflow: hidden;
+              box-shadow: 0 0 60px rgba(68, 214, 44, 0.1);
+            ">
+          <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80"
+            alt="TP-Link Networking Gear" style="transition: transform 1s; cursor: crosshair"
+            onmouseover="this.style.transform = 'scale(1.05)'" onmouseout="this.style.transform = 'scale(1)'" />
+          <div style="
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to top, rgba(10,10,15,0.8) 0%, transparent 50%);
+                pointer-events: none;
+              "></div>
+          <div style="
+                position: absolute;
+                bottom: 20px;
+                left: 20px;
+                right: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              ">
+            <div style="
+                  background: rgba(5, 5, 15, 0.9);
+                  padding: 8px 20px;
+                  border: 1px solid var(--accent);
+                  color: var(--accent);
+                  backdrop-filter: blur(10px);
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                  font-weight: 700;
+                  font-family: var(--font-heading);
+                  letter-spacing: 2px;
+                  text-transform: uppercase;
+                  font-size: 0.75rem;
+                ">
+              <i class="fa-solid fa-satellite-dish"></i>
+              Enterprise Link Active
+            </div>
+          </div>
+        </div>
+        <div class="split-content">
+          <h2 style="font-size: 2.5rem; margin-bottom: 20px;">
+            <span class="text-gradient">Networking</span> Performance
+          </h2>
+          <p style="
+                margin-bottom: 30px;
+                font-size: 1.05rem;
+                color: var(--text-muted);
+                line-height: 1.8;
+              ">
+            Enterprise-grade solutions from TP-Link, Syrotech, Grandstream, MikroTik, and Ubiquiti.
+            Latency-free connectivity optimized for competitive gaming and high-performance workplaces.
+          </p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 35px;">
+            <div
+              style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 20px; border-radius: 4px;">
+              <i class="fa-solid fa-server"
+                style="color: var(--accent); font-size: 1.3rem; margin-bottom: 10px; display: block;"></i>
+              <h4 style="font-size: 0.95rem; margin-bottom: 4px;">Wi-Fi 7 Mesh</h4>
+              <p style="color: var(--text-muted); font-size: 0.8rem;">Whole-home coverage</p>
+            </div>
+            <div
+              style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 20px; border-radius: 4px;">
+              <i class="fa-solid fa-shield-halved"
+                style="color: var(--accent); font-size: 1.3rem; margin-bottom: 10px; display: block;"></i>
+              <h4 style="font-size: 0.95rem; margin-bottom: 4px;">Security</h4>
+              <p style="color: var(--text-muted); font-size: 0.8rem;">Enterprise protocols</p>
+            </div>
+            <div
+              style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 20px; border-radius: 4px;">
+              <i class="fa-solid fa-gauge-high"
+                style="color: var(--accent); font-size: 1.3rem; margin-bottom: 10px; display: block;"></i>
+              <h4 style="font-size: 0.95rem; margin-bottom: 4px;">Low Latency</h4>
+              <p style="color: var(--text-muted); font-size: 0.8rem;">QoS routing</p>
+            </div>
+            <div
+              style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 20px; border-radius: 4px;">
+              <i class="fa-solid fa-network-wired"
+                style="color: var(--accent); font-size: 1.3rem; margin-bottom: 10px; display: block;"></i>
+              <h4 style="font-size: 0.95rem; margin-bottom: 4px;">Scalable</h4>
+              <p style="color: var(--text-muted); font-size: 0.8rem;">Office & data center</p>
+            </div>
+          </div>
+
+          <a href="#" class="btn btn-primary">Shop Networking</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Data Flow Transistion Canvas -->
+  <section class="data-flow-interstitial" style="display:none;">
+    <div style="position: relative; z-index: 2; text-align: center">
+      <div style="
+            width: 1px;
+            height: 150px;
+            background: linear-gradient(
+              to bottom,
+              transparent,
+              rgba(255, 255, 255, 0.3),
+              transparent
+            );
+            margin: 0 auto;
+          "></div>
+    </div>
+  </section>
+
+  <!-- Wide Categories Section -->
+  <section class="section-padding animate-on-scroll" style="background: rgba(255, 255, 255, 0.01)">
+    <div class="container">
+      <div class="section-header">
+        <h2>
+          Explore the
+          <span class="text-gradient glitch-text" data-text="Ecosystem">Ecosystem</span>
+        </h2>
+        <p>
+          Comprehensive hardware selection for professionals and enthusiasts
+        </p>
+      </div>
+
+      <div class="product-scroller-wrapper animate-on-scroll" style="margin-top: 20px">
+        <button class="scroll-btn scroll-left" onclick="scrollCategories(-1)">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <!-- category scroller behaves like the product scroller but fits the wide layout -->
+        <div class="product-scroller" id="categoryScroller" style="gap: 20px">
+          <div class="wide-cat-card" style="min-width: 320px; flex: 0 0 auto">
+            <img src="https://images.unsplash.com/photo-1547119957-637f8679db1e?auto=format&fit=crop&w=400&q=80"
+              alt="Monitors" />
+            <div class="wide-cat-overlay">
+              <h3>Monitors</h3>
+              <p>Ultrawide & Esports</p>
+            </div>
+          </div>
+          <div class="wide-cat-card" style="min-width: 320px; flex: 0 0 auto">
+            <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=400&q=80"
+              alt="Processors" />
+            <div class="wide-cat-overlay">
+              <h3>Processors</h3>
+              <p>Intel Core & AMD</p>
+            </div>
+          </div>
+          <div class="wide-cat-card" style="min-width: 320px; flex: 0 0 auto">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80"
+              alt="Cases" />
+            <div class="wide-cat-overlay">
+              <h3>PC Cases</h3>
+              <p>Airflow & Dual-Chamber</p>
+            </div>
+          </div>
+          <div class="wide-cat-card" style="min-width: 320px; flex: 0 0 auto">
+            <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=400&q=80"
+              alt="Motherboards" />
+            <div class="wide-cat-overlay">
+              <h3>Motherboards</h3>
+              <p>Z790 & X670E Platforms</p>
+            </div>
+          </div>
+          <div class="wide-cat-card" style="min-width: 320px; flex: 0 0 auto">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=400&q=80"
+              alt="GPUs" />
+            <div class="wide-cat-overlay">
+              <h3>Graphics Cards</h3>
+              <p>RTX 40 Series & Radeon</p>
+            </div>
+          </div>
+          <div class="wide-cat-card" style="min-width: 320px; flex: 0 0 auto">
+            <img src="https://images.unsplash.com/photo-1626218174358-7769486c4b79?auto=format&fit=crop&w=400&q=80"
+              alt="RAM" />
+            <div class="wide-cat-overlay">
+              <h3>Memory</h3>
+              <p>DDR5 High-Frequency</p>
+            </div>
+          </div>
+          <div class="wide-cat-card" style="min-width: 320px; flex: 0 0 auto">
+            <img src="https://images.unsplash.com/photo-1563203369-26f2e4a5ccf7?auto=format&fit=crop&w=400&q=80"
+              alt="Storage" />
+            <div class="wide-cat-overlay">
+              <h3>Storage</h3>
+              <p>NVMe Gen5 SSDs</p>
+            </div>
+          </div>
+          <div class="wide-cat-card" style="min-width: 320px; flex: 0 0 auto">
+            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=400&q=80"
+              alt="Keyboards" />
+            <div class="wide-cat-overlay">
+              <h3>Keyboards</h3>
+              <p>Custom Mechanicals</p>
+            </div>
+          </div>
+          <div class="wide-cat-card" style="min-width: 320px; flex: 0 0 auto">
+            <img src="https://images.unsplash.com/photo-1625842268584-8f3296236761?auto=format&fit=crop&w=400&q=80"
+              alt="Mice" />
+            <div class="wide-cat-overlay">
+              <h3>Gaming Mice</h3>
+              <p>Ultra-lightweight Wireless</p>
+            </div>
+          </div>
+          <div class="wide-cat-card" style="min-width: 320px; flex: 0 0 auto">
+            <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=400&q=80"
+              alt="Audio" />
+            <div class="wide-cat-overlay">
+              <h3>Audio</h3>
+              <p>Studio Headsets & DACs</p>
+            </div>
+          </div>
+          <div class="wide-cat-card" style="min-width: 320px; flex: 0 0 auto">
+            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80"
+              alt="Networking" />
+            <div class="wide-cat-overlay">
+              <h3>Networking</h3>
+              <p>Wi-Fi 7 Routers & Mesh</p>
+            </div>
+          </div>
+          <div class="wide-cat-card" style="min-width: 320px; flex: 0 0 auto">
+            <img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=400&q=80"
+              alt="Accessories" />
+            <div class="wide-cat-overlay">
+              <h3>Accessories</h3>
+              <p>Controllers & Streaming</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="scroll-btn scroll-right" onclick="scrollCategories(1)">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Elite Collection (4-Tab System) -->
+  <section class="section-padding animate-on-scroll" style="padding-top: 60px">
+    <div class="container">
+      <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 50px">
+        <h2 class="section-title">
+          Curate Your <span class="text-gradient">Ecosystem</span>
+        </h2>
+        <p style="color: var(--text-muted)">
+          The most compatible, high-end peripherals hand-picked by our experts
+          for a seamless, breathtaking workstation experience.
+        </p>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="elite-tabs" style="
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+          ">
+        <button class="btn btn-primary" onclick="switchEliteTab('monitor')" id="tab-monitor">
+          The Monitor
+        </button>
+        <button class="btn btn-outline" onclick="switchEliteTab('headset')" id="tab-headset">
+          The Headset
+        </button>
+        <button class="btn btn-outline" onclick="switchEliteTab('webcam')" id="tab-webcam">
+          The Webcam
+        </button>
+        <button class="btn btn-outline" onclick="switchEliteTab('setup')" id="tab-setup">
+          The Ultimate Setup
+        </button>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div class="split-section reverse" id="eliteContent" style="min-height: 400px; align-items: center">
+        <!-- Initial Content (Monitor) -->
+        <div class="split-image" id="eliteImageContainer">
+          <img src="https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=800&q=80"
+            alt="Elite Monitor" id="eliteImage" />
+        </div>
+        <div class="split-content" id="eliteTextContainer">
+          <h3 style="font-size: 2rem; margin-bottom: 15px">
+            <span class="text-gradient" id="eliteTitle">Pro Display XDR</span>
+          </h3>
+          <p style="
+                color: var(--text-muted);
+                margin-bottom: 30px;
+                font-size: 1.1rem;
+              " id="eliteDesc">
+            A masterful 6K Retina display with extreme dynamic range,
+            staggering contrast ratio, and a hyper-wide viewing angle.
+            Engineered for visual perfection.
+          </p>
+
+          <div style="
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                margin-bottom: 40px;
+              " id="eliteSpecs">
+            <div class="product-card" style="
+                  margin: 0;
+                  padding: 15px;
+                  background: rgba(255, 255, 255, 0.03);
+                ">
+              <h4 style="font-size: 0.9rem; color: var(--accent)">
+                Resolution
+              </h4>
+              <p style="font-size: 1.2rem; font-weight: bold">6016 x 3384</p>
+            </div>
+            <div class="product-card" style="
+                  margin: 0;
+                  padding: 15px;
+                  background: rgba(255, 255, 255, 0.03);
+                ">
+              <h4 style="font-size: 0.9rem; color: var(--accent)">
+                Brightness
+              </h4>
+              <p style="font-size: 1.2rem; font-weight: bold">1600 nits</p>
+            </div>
+          </div>
+          <a href="#" class="btn btn-primary">Shop Displays</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mid Banner CTA -->
+  <section class="cta-section animate-on-scroll">
+    <div class="container cta-container">
+      <div class="cta-content">
+        <h2>
+          Enterprise <br /><span class="text-gradient">Networking Solutions</span>
+        </h2>
+        <p>
+          Deploy high-capacity networking infrastructure with professional
+          gear from TP-Link, Ubiquiti, and MikroTik. Scalable solutions for
+          modern offices and data centers.
+        </p>
+        <a href="#" class="btn btn-primary">Explore Enterprise</a>
+      </div>
+      <div class="cta-image">
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&w=800&q=80"
+          alt="Server Infrastructure" style="border-radius: 20px" />
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Color Variant Reveal (Interactive Slider) -->
+  <section class="keyboard-compare animate-on-scroll">
+    <div class="container">
+      <div class="section-header">
+        <h2>Choose Your <span class="text-gradient">Aesthetic</span></h2>
+        <p>Drag the slider to reveal the Arctic White variant</p>
+      </div>
+      <div class="comparison-container" id="monitorComparison">
+        <!-- Background Image (OLED Variant) -->
+        <div class="comparison-item">
+          <img src="https://images.unsplash.com/photo-1547119957-637f8679db1e?auto=format&fit=crop&w=1200&q=80"
+            class="comparison-image" alt="Pro OLED Display" />
+          <div style="
+                position: absolute;
+                bottom: 30px;
+                right: 40px;
+                color: var(--accent);
+                background: rgba(0, 0, 0, 0.8);
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-weight: bold;
+                border: 1px solid var(--accent);
+              ">
+            Pro OLED Variant
+          </div>
+        </div>
+        <!-- Overlay Image (Standard Variant) -->
+        <div class="comparison-overlay" id="comparisonOverlay">
+          <img src="https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=1200&q=80"
+            class="comparison-image" alt="Standard LCD Display" />
+          <div style="
+                position: absolute;
+                bottom: 30px;
+                left: 40px;
+                color: white;
+                background: rgba(0, 0, 0, 0.8);
+                padding: 5px 15px;
+                border-radius: 20px;
+                white-space: nowrap;
+                font-weight: bold;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+              ">
+            Standard LCD Variant
+          </div>
+        </div>
+        <div class="comparison-slider" id="comparisonSlider">
+          <div class="slider-handle">
+            <i class="fa-solid fa-arrows-left-right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Icon Marquee (End) -->
+  <section class="icon-marquee-section">
+    <div class="icon-marquee-inner">
+      <div class="icon-item"><i class="fa-solid fa-laptop"></i> LAPTOPS</div>
+      <div class="icon-item"><i class="fa-solid fa-microchip"></i> CPU</div>
+      <div class="icon-item"><i class="fa-solid fa-memory"></i> RAM</div>
+      <div class="icon-item">
+        <i class="fa-solid fa-keyboard"></i> KEYBOARDS
+      </div>
+      <div class="icon-item"><i class="fa-solid fa-mouse"></i> MICE</div>
+      <div class="icon-item">
+        <i class="fa-solid fa-headphones"></i> AUDIO
+      </div>
+      <div class="icon-item"><i class="fa-solid fa-wifi"></i> ROUTERS</div>
+      <div class="icon-item"><i class="fa-solid fa-print"></i> PRINTERS</div>
+      <div class="icon-item">
+        <i class="fa-solid fa-display"></i> MONITORS
+      </div>
+      <div class="icon-item"><i class="fa-solid fa-camera"></i> CAMERAS</div>
+      <!-- Duplicated for loop -->
+      <div class="icon-item"><i class="fa-solid fa-laptop"></i> LAPTOPS</div>
+      <div class="icon-item"><i class="fa-solid fa-microchip"></i> CPU</div>
+      <div class="icon-item"><i class="fa-solid fa-memory"></i> RAM</div>
+      <div class="icon-item">
+        <i class="fa-solid fa-keyboard"></i> KEYBOARDS
+      </div>
+      <div class="icon-item"><i class="fa-solid fa-mouse"></i> MICE</div>
+      <div class="icon-item">
+        <i class="fa-solid fa-headphones"></i> AUDIO
+      </div>
+      <div class="icon-item"><i class="fa-solid fa-wifi"></i> ROUTERS</div>
+      <div class="icon-item"><i class="fa-solid fa-print"></i> PRINTERS</div>
+      <div class="icon-item">
+        <i class="fa-solid fa-display"></i> MONITORS
+      </div>
+      <div class="icon-item"><i class="fa-solid fa-camera"></i> CAMERAS</div>
+    </div>
+  </section>
+
+  <!-- Epic Footer Evolution -->
+  <footer style="
+        position: relative;
+        overflow: hidden;
+        padding-top: 80px;
+        background: #05020a;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      ">
+    <div class="container" style="position: relative; z-index: 2">
+      <div class="footer-grid" style="grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 40px">
+        <div class="footer-about">
+          <a href="#" class="logo" style="
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+                display: inline-block;
+              ">
+            <i class="fa-solid fa-microchip" style="color: var(--accent)"></i>
+            IT Galaxy
+          </a>
+          <p style="
+                color: var(--text-muted);
+                line-height: 1.6;
+                margin-bottom: 25px;
+              ">
+            Your premium destination for high-end electronics, elite gaming
+            gear, and professional PC components. We deliver uncompromising
+            performance directly to your doorstep with expert customer
+            service.
+          </p>
+          <div class="social-icons" style="display: flex; gap: 15px">
+            <a href="#" style="
+                  width: 40px;
+                  height: 40px;
+                  background: rgba(255, 255, 255, 0.05);
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  transition: all 0.3s ease;
+                "><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" style="
+                  width: 40px;
+                  height: 40px;
+                  background: rgba(255, 255, 255, 0.05);
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  transition: all 0.3s ease;
+                "><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" style="
+                  width: 40px;
+                  height: 40px;
+                  background: rgba(255, 255, 255, 0.05);
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  transition: all 0.3s ease;
+                "><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" style="
+                  width: 40px;
+                  height: 40px;
+                  background: rgba(255, 255, 255, 0.05);
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  transition: all 0.3s ease;
+                "><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h4 style="color: white; margin-bottom: 20px; font-size: 1.1rem">
+            Hardware
+          </h4>
+          <ul style="list-style: none; padding: 0">
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Processors (CPU)</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Graphics Cards</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Motherboards</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Memory (RAM)</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Storage (SSD/HDD)</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Power Supplies</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h4 style="color: white; margin-bottom: 20px; font-size: 1.1rem">
+            Peripherals
+          </h4>
+          <ul style="list-style: none; padding: 0">
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Gaming Monitors</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Mechanical Keyboards</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Wireless Mice</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Studio Audio</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Streaming Gear</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Controllers</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h4 style="color: white; margin-bottom: 20px; font-size: 1.1rem">
+            Ecosystem
+          </h4>
+          <ul style="list-style: none; padding: 0">
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Pre-built PCs</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Custom Laptops</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Networking (Wi-Fi 7)</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">Smart Home</a>
+            </li>
+            <li style="margin-bottom: 12px">
+              <a href="#" style="
+                    color: var(--text-muted);
+                    text-decoration: none;
+                    transition: color 0.3s ease;
+                  ">VR Headsets</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="newsletter">
+          <h4 style="color: white; margin-bottom: 20px; font-size: 1.1rem">
+            Galaxy Insider
+          </h4>
+          <p style="
+                color: var(--text-muted);
+                margin-bottom: 20px;
+                font-size: 0.95rem;
+                line-height: 1.5;
+              ">
+            Join the elite. Subscribe for exclusive hardware drops, early
+            access deals, and the latest tech news.
+          </p>
+          <form style="display: flex; flex-direction: column; gap: 10px">
+            <input type="email" placeholder="Enter your email address" style="
+                  padding: 12px 15px;
+                  border-radius: 8px;
+                  border: 1px solid rgba(255, 255, 255, 0.1);
+                  background: rgba(255, 255, 255, 0.02);
+                  color: white;
+                  width: 100%;
+                  outline: none;
+                " />
+            <button type="button" class="btn btn-primary" style="
+                  width: 100%;
+                  padding: 12px;
+                  border-radius: 8px;
+                  font-weight: 600;
+                ">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom" style="
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+          ">
+        <p style="color: var(--text-muted); font-size: 0.9rem">
+          &copy; 2026 IT Galaxy. Constructed for the future.
+        </p>
+        <div class="footer-legal-links" style="display: flex; gap: 20px">
+          <a href="#" style="
+                color: var(--text-muted);
+                font-size: 0.9rem;
+                text-decoration: none;
+              ">Privacy Policy</a>
+          <a href="#" style="
+                color: var(--text-muted);
+                font-size: 0.9rem;
+                text-decoration: none;
+              ">Terms of Service</a>
+          <a href="#" style="
+                color: var(--text-muted);
+                font-size: 0.9rem;
+                text-decoration: none;
+              ">Return Policy</a>
+        </div>
+        <div class="payment-icons" style="
+              font-size: 1.5rem;
+              color: rgba(255, 255, 255, 0.3);
+              display: flex;
+              gap: 15px;
+            ">
+          <i class="fa-brands fa-cc-visa"></i>
+          <i class="fa-brands fa-cc-mastercard"></i>
+          <i class="fa-brands fa-cc-paypal"></i>
+          <i class="fa-brands fa-google-pay"></i>
+          <i class="fa-brands fa-apple-pay"></i>
+        </div>
+      </div>
+    </div>
+
+
+  </footer>
+
+  <!-- Interactive Scripts -->
+  <script>
+    // Header scroll effect
+    window.addEventListener("scroll", () => {
+      const header = document.getElementById("header");
+      if (window.scrollY > 50) {
+        header.classList.add("scrolled");
+      } else {
+        if (
+          !document.getElementById("megaMenu").classList.contains("active")
+        ) {
+          header.classList.remove("scrolled");
+          header.style.background = "";
+        }
+      }
+    });
+
+    // Tesla Style Mega Menu Logic
+    const navLinks = document.querySelectorAll("#mainNav li[data-menu]");
+    const megaMenu = document.getElementById("megaMenu");
+    const megaContent = document.getElementById("megaContent");
+    const headerContainer = document.getElementById("header");
+
+    const menuData = {
+      accessories: `
+                <div style="display: flex; gap: 40px; width: 100%; max-width: 1200px; justify-content: center;">
+                    <div style="display: flex; gap: 30px; flex: 3;">
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Top Selling Headsets</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Audio →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Creator Microphones</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Creator Gear →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Pro Keyboards</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Input Devices →</a>
+                        </div>
+                    </div>
+                    <div style="width: 1px; background: rgba(255,255,255,0.1); margin: 0 10px;"></div>
+                    <div class="mega-menu-column" style="flex: 1; justify-content: flex-start; padding-top: 10px;">
+                        <div class="mega-menu-title" style="margin-bottom: 15px;">More Categories</div>
+                        <a href="#">Gaming Mice & Mats</a>
+                        <a href="#">Webcams & Streaming</a>
+                        <a href="#">Controllers</a>
+                        <a href="#">Cables & Adapters</a>
+                    </div>
+                </div>
+            `,
+      monitors: `
+                <div style="display: flex; gap: 40px; width: 100%; max-width: 1200px; justify-content: center;">
+                    <div style="display: flex; gap: 30px; flex: 3;">
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1552831388-6a0b358ef1fc?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Top Selling Ultrawides</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Ultrawide →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1585792180666-f7347c490ee2?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Esports 240Hz+</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop High Refresh →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1616010652065-2c2ecdfac659?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Creator 4K Display</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop 4K UHD →</a>
+                        </div>
+                    </div>
+                    <div style="width: 1px; background: rgba(255,255,255,0.1); margin: 0 10px;"></div>
+                    <div class="mega-menu-column" style="flex: 1; justify-content: flex-start; padding-top: 10px;">
+                        <div class="mega-menu-title" style="margin-bottom: 15px;">More Categories</div>
+                        <a href="#">1080p Essential</a>
+                        <a href="#">1440p Sweet Spot</a>
+                        <a href="#">Curved Monitors</a>
+                        <a href="#">Monitor Arms</a>
+                    </div>
+                </div>
+            `,
+      laptops: `
+                <div style="display: flex; gap: 40px; width: 100%; max-width: 1200px; justify-content: center;">
+                    <div style="display: flex; gap: 30px; flex: 3;">
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Top Selling Gaming</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop RTX Laptops →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">MacBook Pro</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Apple Silicon →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Thin & Light Creators</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Ultrabooks →</a>
+                        </div>
+                    </div>
+                    <div style="width: 1px; background: rgba(255,255,255,0.1); margin: 0 10px;"></div>
+                    <div class="mega-menu-column" style="flex: 1; justify-content: flex-start; padding-top: 10px;">
+                        <div class="mega-menu-title" style="margin-bottom: 15px;">More Categories</div>
+                        <a href="#">Alienware Series</a>
+                        <a href="#">ASUS ROG</a>
+                        <a href="#">Lenovo Legion</a>
+                        <a href="#">Business Laptops</a>
+                    </div>
+                </div>
+            `,
+      networking: `
+                <div style="display: flex; gap: 40px; width: 100%; max-width: 1200px; justify-content: center;">
+                    <div style="display: flex; gap: 30px; flex: 3;">
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Top Selling Wi-Fi 6</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Routers →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1558227096-1cc599e6de73?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Whole Home Mesh</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Mesh Systems →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Network Switches</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Switches →</a>
+                        </div>
+                    </div>
+                    <div style="width: 1px; background: rgba(255,255,255,0.1); margin: 0 10px;"></div>
+                    <div class="mega-menu-column" style="flex: 1; justify-content: flex-start; padding-top: 10px;">
+                        <div class="mega-menu-title" style="margin-bottom: 15px;">More Categories</div>
+                        <a href="#">Gaming Routers</a>
+                        <a href="#">Wi-Fi Adapters</a>
+                        <a href="#">Ethernet Cables</a>
+                        <a href="#">Network Attached Storage</a>
+                    </div>
+                </div>
+            `,
+      printers: `
+                <div style="display: flex; gap: 40px; width: 100%; max-width: 1200px; justify-content: center;">
+                    <div style="display: flex; gap: 30px; flex: 3;">
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Top Selling Lasers</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Laser Printers →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1560067160-c3d31b2ec4ba?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Inkjet & Photo</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Color Printers →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">All-In-One Office</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop All-In-Ones →</a>
+                        </div>
+                    </div>
+                    <div style="width: 1px; background: rgba(255,255,255,0.1); margin: 0 10px;"></div>
+                    <div class="mega-menu-column" style="flex: 1; justify-content: flex-start; padding-top: 10px;">
+                        <div class="mega-menu-title" style="margin-bottom: 15px;">More Categories</div>
+                        <a href="#">Printer Ink & Toner</a>
+                        <a href="#">3D Printers</a>
+                        <a href="#">Label Makers</a>
+                        <a href="#">Scanners</a>
+                    </div>
+                </div>
+            `,
+      surveillance: `
+                <div style="display: flex; gap: 40px; width: 100%; max-width: 1200px; justify-content: center;">
+                    <div style="display: flex; gap: 30px; flex: 3;">
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1557597774-9d27375bfcc1?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Top Selling IP Cameras</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop IP Cameras →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Smart Doorbell Cams</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Smart Home →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1520630777507-64bfad2c483a?auto=format&fit=crop&w=400&q=80" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Security Systems</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop DVR/NVR Kits →</a>
+                        </div>
+                    </div>
+                    <div style="width: 1px; background: rgba(255,255,255,0.1); margin: 0 10px;"></div>
+                    <div class="mega-menu-column" style="flex: 1; justify-content: flex-start; padding-top: 10px;">
+                        <div class="mega-menu-title" style="margin-bottom: 15px;">More Categories</div>
+                        <a href="#">Baby Monitors</a>
+                        <a href="#">Hidden Cameras</a>
+                        <a href="#">Sensors & Alarms</a>
+                        <a href="#">Surveillance Storage</a>
+                    </div>
+                </div>
+            `,
+      spares: `
+                <div style="display: flex; gap: 40px; width: 100%; max-width: 1200px; justify-content: center;">
+                    <div style="display: flex; gap: 30px; flex: 3;">
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=400&q=80" alt="Dell Spares" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Dell Genuine</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Dell Parts →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=400&q=80" alt="HP Spares" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">HP Replacements</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop HP Parts →</a>
+                        </div>
+                        <div class="mega-menu-promo" style="margin:0; flex: 1; align-items: flex-start; max-width: none; background: transparent; border: none; padding: 0;">
+                            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Apple Spares" style="height: 140px; object-fit: cover; width: 100%; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: white; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;">Apple Mac Components</h4>
+                            <a href="#" style="color: var(--accent); font-size: 0.85rem;">Shop Mac Parts →</a>
+                        </div>
+                    </div>
+                    <div style="width: 1px; background: rgba(255,255,255,0.1); margin: 0 10px;"></div>
+                    <div class="mega-menu-column" style="flex: 1; justify-content: flex-start; padding-top: 10px;">
+                        <div class="mega-menu-title" style="margin-bottom: 15px;">More Categories</div>
+                        <a href="#">Laptop Batteries</a>
+                        <a href="#">Laptop Screens</a>
+                        <a href="#">Power Adapters</a>
+                        <a href="#">Cooling Fans</a>
+                    </div>
+                </div>
+            `,
+    };
+
+    let menuTimeout;
+
+    navLinks.forEach((link) => {
+      link.addEventListener("mouseenter", (e) => {
+        clearTimeout(menuTimeout);
+        const menuId = link.getAttribute("data-menu");
+
+        if (menuId === "home") {
+          megaMenu.classList.remove("active");
+          if (window.scrollY < 50) {
+            headerContainer.style.background = "var(--glass-bg)";
+            headerContainer.classList.remove("scrolled");
+          }
+          return;
+        }
+
+        if (menuData[menuId]) {
+          megaContent.innerHTML = menuData[menuId];
+        } else {
+          megaContent.innerHTML = `
+                        <div class="mega-menu-column">
+                            <div class="mega-menu-title">Explore ${menuId.charAt(0).toUpperCase() + menuId.slice(1)}</div>
+                            <a href="#">View All Deals</a>
+                            <a href="#">New Arrivals</a>
+                            <a href="#">Bestsellers</a>
+                        </div>
+                    `;
+        }
+
+        megaMenu.classList.add("active");
+        headerContainer.classList.add("scrolled");
+        headerContainer.style.background = "rgba(5, 5, 5, 0.98)";
+      });
+
+      link.addEventListener("mouseleave", hideMenu);
+    });
+
+    megaMenu.addEventListener("mouseenter", () => clearTimeout(menuTimeout));
+    megaMenu.addEventListener("mouseleave", hideMenu);
+
+    function hideMenu() {
+      menuTimeout = setTimeout(() => {
+        megaMenu.classList.remove("active");
+        if (window.scrollY < 50) {
+          headerContainer.style.background = "var(--glass-bg)";
+          headerContainer.classList.remove("scrolled");
+        }
+      }, 100);
+    }
+
+    // Intersection Observer for Scroll Animations (Fade Up)
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.15,
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target); // Run once
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll(".animate-on-scroll").forEach((element) => {
+      observer.observe(element);
+    });
+
+    // Horizontal Product Scroller Logic (Amazon Style)
+    function scrollProducts(direction) {
+      const scroller = document.getElementById("productScroller");
+      const scrollAmount = Math.min(scroller.clientWidth * 0.8, 800); // Scroll 80% viewport, max 800px
+      scroller.scrollBy({
+        left: direction * scrollAmount,
+        behavior: "smooth",
+      });
+    }
+
+    function scrollFlashDeals(direction) {
+      const scroller = document.getElementById("flashScroller");
+      const scrollAmount = Math.min(scroller.clientWidth * 0.8, 800); // Scroll 80% viewport, max 800px
+      scroller.scrollBy({
+        left: direction * scrollAmount,
+        behavior: "smooth",
+      });
+    }
+
+    function scrollCategories(direction) {
+      const scroller = document.getElementById("categoryScroller");
+      const scrollAmount = Math.min(scroller.clientWidth * 0.8, 800);
+      scroller.scrollBy({
+        left: direction * scrollAmount,
+        behavior: "smooth",
+      });
+    }
+
+    // Visibility Observer for Canvases
+    const canvasObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.isCanvasVisible = entry.isIntersecting;
+        });
+      },
+      { threshold: 0.01 },
+    );
+
+    // Data Flow Canvas Animation
+    const dataCanvas = document.getElementById("dataCanvas");
+    if (dataCanvas) {
+      canvasObserver.observe(dataCanvas);
+      const dCtx = dataCanvas.getContext("2d");
+      let dataStreams = [];
+      const streamCount = window.innerWidth < 768 ? 15 : 30;
+
+      function initData() {
+        dataCanvas.width = dataCanvas.offsetWidth;
+        dataCanvas.height = dataCanvas.offsetHeight;
+        dataStreams = [];
+        for (let i = 0; i < streamCount; i++) {
+          dataStreams.push({
+            y: Math.random() * dataCanvas.height,
+            x: Math.random() * dataCanvas.width,
+            length: Math.random() * 40 + 20,
+            speed: Math.random() * 4 + 2,
+            opacity: Math.random() * 0.4 + 0.1,
+          });
+        }
+      }
+
+      function animateData() {
+        if (!dataCanvas.isCanvasVisible) {
+          requestAnimationFrame(animateData);
+          return;
+        }
+        dCtx.fillStyle = "rgba(0, 0, 0, 0.15)";
+        dCtx.fillRect(0, 0, dataCanvas.width, dataCanvas.height);
+
+        dCtx.shadowBlur = 5;
+        dCtx.shadowColor = "#00d2ff";
+        dCtx.lineWidth = 1.5;
+
+        dataStreams.forEach((stream) => {
+          stream.x += stream.speed;
+          if (stream.x > dataCanvas.width + stream.length) {
+            stream.x = -stream.length;
+            stream.y = Math.random() * dataCanvas.height;
+          }
+
+          const gradient = dCtx.createLinearGradient(
+            stream.x - stream.length,
+            0,
+            stream.x,
+            0,
+          );
+          gradient.addColorStop(0, "transparent");
+          gradient.addColorStop(1, `rgba(0, 210, 255, ${stream.opacity})`);
+
+          dCtx.beginPath();
+          dCtx.moveTo(stream.x - stream.length, stream.y);
+          dCtx.lineTo(stream.x, stream.y);
+          dCtx.strokeStyle = gradient;
+          dCtx.stroke();
+        });
+
+        requestAnimationFrame(animateData);
+      }
+
+      window.addEventListener("resize", initData);
+      initData();
+      animateData();
+    }
+
+    // Elite Collection 4-Tab Logic
+    const eliteData = {
+      monitor: {
+        title: "Pro Display XDR",
+        desc: "A masterful 6K Retina display with extreme dynamic range, staggering contrast ratio, and a hyper-wide viewing angle. Engineered for visual perfection.",
+        img: "https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=800&q=80",
+        spec1Label: "Resolution",
+        spec1Val: "6016 x 3384",
+        spec2Label: "Brightness",
+        spec2Val: "1600 nits",
+      },
+      headset: {
+        title: "Studio ANC Wireless",
+        desc: "Lossless high-fidelity audio paired with active noise cancellation. Dual-layer isolating earcups block the world so you can focus on the game.",
+        img: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=800&q=80",
+        spec1Label: "Drivers",
+        spec1Val: "50mm Neodymium",
+        spec2Label: "Battery",
+        spec2Val: "40 Hours",
+      },
+      webcam: {
+        title: "Creator Cam 4K",
+        desc: "Broadcast in stunning detail with a premium glass lens, smart auto-focus, and a massive Sony sensor that performs incredibly in low light.",
+        img: "https://images.unsplash.com/photo-1590845947376-2638caa89309?auto=format&fit=crop&w=800&q=80",
+        spec1Label: "Sensor",
+        spec1Val: '1/1.8" CMOS',
+        spec2Label: "Framerate",
+        spec2Val: "4K 60fps",
+      },
+      setup: {
+        title: "The Ultimate Ecosystem",
+        desc: "Why settle for parts when you can have a symphony? The Ultimate Setup combines our top-tier peripherals into one cohesive, instantly compatible battlestation.",
+        img: "file:///Users/nikhil/.gemini/antigravity/brain/dde61182-e877-491c-8f07-1d9450c9bc27/featured_collection_teaser_1772531861091.png",
+        spec1Label: "Optimization",
+        spec1Val: "Pre-synced",
+        spec2Label: "Lighting",
+        spec2Val: "Aura Sync",
+      },
+    };
+
+    function switchEliteTab(tabId) {
+      // Update buttons
+      ["monitor", "headset", "webcam", "setup"].forEach((id) => {
+        document.getElementById("tab-" + id).className = "btn btn-outline";
+      });
+      document.getElementById("tab-" + tabId).className = "btn btn-primary";
+
+      // Fade out
+      const img = document.getElementById("eliteImage");
+      const content = document.getElementById("eliteTextContainer");
+
+      img.style.opacity = "0";
+      content.style.opacity = "0";
+      img.style.transform = "scale(0.95)";
+
+      setTimeout(() => {
+        const data = eliteData[tabId];
+        img.src = data.img;
+        document.getElementById("eliteTitle").innerText = data.title;
+        document.getElementById("eliteDesc").innerText = data.desc;
+
+        document.getElementById("eliteSpecs").innerHTML = `
+                    <div class="product-card" style="margin: 0; padding: 15px; background: rgba(255,255,255,0.03);">
+                        <h4 style="font-size: 0.9rem; color: var(--accent);">${data.spec1Label}</h4>
+                        <p style="font-size: 1.2rem; font-weight: bold;">${data.spec1Val}</p>
+                    </div>
+                    <div class="product-card" style="margin: 0; padding: 15px; background: rgba(255,255,255,0.03);">
+                            <h4 style="font-size: 0.9rem; color: var(--accent);">${data.spec2Label}</h4>
+                        <p style="font-size: 1.2rem; font-weight: bold;">${data.spec2Val}</p>
+                    </div>
+                `;
+
+        // Fade in
+        img.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+        img.style.opacity = "1";
+        img.style.transform = "scale(1)";
+        content.style.opacity = "1";
+      }, 300);
+    }
+
+    // Flash Deals Countdown Timer
+    function updateTimer() {
+      const hoursVal = document.querySelectorAll(".countdown-val")[0];
+      const minsVal = document.querySelectorAll(".countdown-val")[1];
+      const secsVal = document.querySelectorAll(".countdown-val")[2];
+
+      if (!hoursVal) return;
+
+      let h = parseInt(hoursVal.innerText);
+      let m = parseInt(minsVal.innerText);
+      let s = parseInt(secsVal.innerText);
+
+      s--;
+      if (s < 0) {
+        s = 59;
+        m--;
+      }
+      if (m < 0) {
+        m = 59;
+        h--;
+      }
+      if (h < 0) {
+        h = 23;
+      }
+
+      hoursVal.innerText = h.toString().padStart(2, "0");
+      minsVal.innerText = m.toString().padStart(2, "0");
+      secsVal.innerText = s.toString().padStart(2, "0");
+    }
+
+    setInterval(updateTimer, 1000);
+    // Category Marquee SCROLLER Logic
+    function scrollCategories(direction) {
+      const scroller = document.getElementById("categoryScroller");
+      const scrollAmount = 420; // Width of card + gap
+      scroller.scrollBy({
+        left: direction * scrollAmount,
+        behavior: "smooth",
+      });
+    }
+
+    // Category Marquee - Seamless CSS Transition Replacement
+    const categoryScrollerDOM = document.getElementById("categoryScroller");
+    if (categoryScrollerDOM) {
+      // We use CSS for the primary motion now to save JS cycles
+      categoryScrollerDOM.style.scrollBehavior = "smooth";
+    }
+    // Interactive Slider - User Click and Drag Support
+    const comparisonContainer = document.getElementById("monitorComparison");
+    const comparisonOverlay = document.getElementById("comparisonOverlay");
+    const comparisonSlider = document.getElementById("comparisonSlider");
+
+    if (comparisonContainer) {
+      let isDragging = false;
+
+      const updateSlider = (clientX) => {
+        const rect = comparisonContainer.getBoundingClientRect();
+        let position = ((clientX - rect.left) / rect.width) * 100;
+        if (position < 0) position = 0;
+        if (position > 100) position = 100;
+        comparisonSlider.style.transition = "none";
+        comparisonOverlay.style.transition = "none";
+        comparisonSlider.style.left = `${position}%`;
+        comparisonOverlay.style.width = `${position}%`;
+      };
+
+      comparisonSlider.addEventListener(
+        "mousedown",
+        () => (isDragging = true),
+      );
+      window.addEventListener("mouseup", () => (isDragging = false));
+
+      window.addEventListener("mousemove", (e) => {
+        if (isDragging) updateSlider(e.clientX);
+      });
+
+      // Touch support
+      comparisonSlider.addEventListener(
+        "touchstart",
+        () => (isDragging = true),
+      );
+      window.addEventListener("touchend", () => (isDragging = false));
+      window.addEventListener("touchmove", (e) => {
+        if (isDragging) updateSlider(e.touches[0].clientX);
+      });
+    }
+
+    // Custom Cursor Removal - Improved Performance
+    document
+      .querySelectorAll("a, button, .product-card, .bento-card, .brand-logo")
+      .forEach((el) => {
+        el.style.cursor = "pointer";
+      });
+
+    // Neural Network Canvas - disabled for clean design
+    const canvas = null;
+
+
+    // Random Sales Popups Logic
+    const salesNames = ["Rahul from Mumbai", "Vikram from Delhi", "Sneha from Bangalore", "Arjun from Pune", "Vivek from Hyderabad"];
+    const salesProducts = ["RTX 4090 OC", "AMD Ryzen 9 7950X", "Pro Display XDR", "Studio ANC Wireless", "ROG Maximus Z790"];
+    const salesTimes = ["12 seconds ago", "2 minutes ago", "5 minutes ago", "just now", "18 minutes ago"];
+
+    const popup = document.getElementById("salesPopup");
+    if (popup) {
+      setInterval(() => {
+        // Randomize
+        const rName = salesNames[Math.floor(Math.random() * salesNames.length)];
+        const rProd = salesProducts[Math.floor(Math.random() * salesProducts.length)];
+        const rTime = salesTimes[Math.floor(Math.random() * salesTimes.length)];
+
+        document.getElementById("spName").innerText = rName;
+        document.getElementById("spProduct").innerText = rProd;
+        document.getElementById("spTime").innerText = rTime;
+
+        // Show
+        popup.classList.add("show");
+
+        // Hide after 5 seconds
+        setTimeout(() => popup.classList.remove("show"), 5000);
+      }, 25000); // Triggers every 25 seconds
+    }
+  </script>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/919876543210" target="_blank" class="floating-whatsapp" aria-label="Chat with us on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="whatsapp-tooltip">Chat with a Build Expert</span>
+  </a>
+
+  <!-- Live Sales Notification Popup -->
+  <div class="sales-popup" id="salesPopup">
+    <div class="sales-popup-img">
+      <i class="fa-solid fa-fire-flame-curved" style="color: var(--accent-red); font-size: 1.5rem;"></i>
+    </div>
+    <div class="sales-popup-text">
+      <p class="sales-popup-name" id="spName">Rahul from Mumbai</p>
+      <p class="sales-popup-action">just bought <span id="spProduct" style="color: var(--accent); font-weight: 600;">RTX
+          4090 OC</span></p>
+      <p class="sales-popup-time" id="spTime">2 minutes ago</p>
+    </div>
+  </div>
+</body>
+
+</html>
