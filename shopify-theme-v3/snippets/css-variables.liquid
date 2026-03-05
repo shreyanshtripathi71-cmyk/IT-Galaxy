@@ -6,11 +6,11 @@
     --text-main: {{ settings.color_text_main | default: '#e8e8e8' }};
     --text-muted: {{ settings.color_text_muted | default: '#777' }};
     --accent: {{ settings.color_accent | default: '#44D62C' }};
-    --accent-glow: {{ settings.color_accent | default: '#44D62C' | color_modify: 'alpha', 0.15 }};
+    --accent-glow: rgba(68, 214, 44, 0.15);
     --accent-secondary: {{ settings.color_accent_secondary | default: '#00D4FF' }};
-    --accent-secondary-glow: {{ settings.color_accent_secondary | default: '#00D4FF' | color_modify: 'alpha', 0.12 }};
+    --accent-secondary-glow: rgba(0, 212, 255, 0.12);
     --accent-red: {{ settings.color_accent_red | default: '#ff2a2a' }};
-    --accent-red-glow: {{ settings.color_accent_red | default: '#ff2a2a' | color_modify: 'alpha', 0.15 }};
+    --accent-red-glow: rgba(255, 42, 42, 0.15);
     --border-color: rgba(255, 255, 255, 0.08);
     --glass-bg: rgba(0, 0, 0, 0.9);
     --glass-border: rgba(255, 255, 255, 0.06);
