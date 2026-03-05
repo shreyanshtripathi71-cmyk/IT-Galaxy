@@ -1,31 +1,66 @@
 {%- comment -%}
-  Footer — Site footer with links, newsletter, social, legal, payments
+  Footer — Futuristic premium footer inspired by Desertcart / Corsair / Razer
+  Features: gradient top border, feature bar, grid layout, newsletter, app badges, trust signals
 {%- endcomment -%}
 
-<footer class="site-footer" style="position:relative;overflow:hidden;padding-top:80px;background:#05020a;border-top:1px solid rgba(255,255,255,0.05);">
-  <div class="container" style="position: relative; z-index: 2">
-    <div class="footer-grid">
-      <!-- About Column -->
-      <div class="footer-about">
-        <a href="/" class="logo" style="font-size:1.8rem;margin-bottom:20px;display:inline-block;">
-          <i class="{{ section.settings.logo_icon | default: 'fa-solid fa-microchip' }}" style="color:var(--accent)"></i>
-          {{ section.settings.store_name | default: shop.name }}
+<!-- Pre-footer Feature Bar -->
+<section class="footer-features">
+  <div class="container">
+    <div class="footer-features-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'feature_item' -%}
+          <div class="footer-feature-item" {{ block.shopify_attributes }}>
+            <div class="footer-feature-icon">
+              <i class="{{ block.settings.icon | default: 'fa-solid fa-truck-fast' }}"></i>
+            </div>
+            <div class="footer-feature-text">
+              <h5>{{ block.settings.title | default: 'Free Shipping' }}</h5>
+              <p>{{ block.settings.subtitle | default: 'On orders above ₹999' }}</p>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<!-- Main Footer -->
+<footer class="footer-futuristic">
+  <!-- Glowing top line -->
+  <div class="footer-glow-line"></div>
+
+  <div class="container">
+    <!-- Upper Footer -->
+    <div class="footer-upper">
+      <!-- Brand Column -->
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">
+          <i class="{{ section.settings.logo_icon | default: 'fa-solid fa-atom' }}" style="color:var(--accent);font-size:1.8rem;"></i>
+          <span>{{ section.settings.store_name | default: shop.name }}</span>
         </a>
-        <p style="color:var(--text-muted);line-height:1.6;margin-bottom:25px;">
-          {{ section.settings.about_text | default: 'Your premium destination for high-end electronics, elite gaming gear, and professional PC components.' }}
-        </p>
-        <div class="social-icons">
+        <p class="footer-tagline">{{ section.settings.tagline | default: 'Your ultimate destination for premium tech & gaming peripherals. Engineered for excellence.' }}</p>
+
+        <!-- Social Links -->
+        <div class="footer-socials">
           {%- if settings.social_instagram != blank -%}
-            <a href="{{ settings.social_instagram }}" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="{{ settings.social_instagram }}" class="footer-social-link" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
           {%- endif -%}
           {%- if settings.social_facebook != blank -%}
-            <a href="{{ settings.social_facebook }}" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="{{ settings.social_facebook }}" class="footer-social-link" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
           {%- endif -%}
           {%- if settings.social_twitter != blank -%}
-            <a href="{{ settings.social_twitter }}" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="{{ settings.social_twitter }}" class="footer-social-link" aria-label="Twitter">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
           {%- endif -%}
           {%- if settings.social_youtube != blank -%}
-            <a href="{{ settings.social_youtube }}" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="{{ settings.social_youtube }}" class="footer-social-link" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
           {%- endif -%}
         </div>
       </div>
@@ -33,70 +68,458 @@
       <!-- Link Columns -->
       {%- for block in section.blocks -%}
         {%- if block.type == 'link_column' -%}
-          <div class="footer-links" {{ block.shopify_attributes }}>
-            <h4>{{ block.settings.heading }}</h4>
-            {%- if block.settings.menu != blank -%}
-              <ul>
+          <div class="footer-link-col" {{ block.shopify_attributes }}>
+            <h4 class="footer-col-title">{{ block.settings.heading }}</h4>
+            <ul class="footer-link-list">
+              {%- if block.settings.menu != blank -%}
                 {%- for link in linklists[block.settings.menu].links -%}
                   <li><a href="{{ link.url }}">{{ link.title }}</a></li>
                 {%- endfor -%}
-              </ul>
-            {%- else -%}
-              {%- assign links = block.settings.links_text | split: '|' -%}
-              <ul>
+              {%- else -%}
+                {%- assign links = block.settings.links_text | split: '|' -%}
                 {%- for link_text in links -%}
-                  <li><a href="#">{{ link_text }}</a></li>
+                  <li><a href="/collections/{{ link_text | handleize }}">{{ link_text }}</a></li>
                 {%- endfor -%}
-              </ul>
-            {%- endif -%}
+              {%- endif -%}
+            </ul>
           </div>
         {%- endif -%}
+      {%- endfor -%}
 
+      <!-- Newsletter Column -->
+      {%- for block in section.blocks -%}
         {%- if block.type == 'newsletter' -%}
-          <div class="newsletter" {{ block.shopify_attributes }}>
-            <h4>{{ block.settings.heading | default: 'Galaxy Insider' }}</h4>
-            <p style="color:var(--text-muted);margin-bottom:20px;font-size:0.95rem;line-height:1.5;">
-              {{ block.settings.description | default: 'Join the elite. Subscribe for exclusive hardware drops and the latest tech news.' }}
-            </p>
+          <div class="footer-newsletter" {{ block.shopify_attributes }}>
+            <h4 class="footer-col-title">{{ block.settings.heading | default: 'Stay in the Loop' }}</h4>
+            <p class="footer-newsletter-desc">{{ block.settings.description | default: 'Get exclusive deals, early access & tech news delivered to your inbox.' }}</p>
             {%- form 'customer', id: 'footer-newsletter' -%}
-              <div style="display:flex;flex-direction:column;gap:10px;">
-                <input type="email" name="contact[email]" placeholder="{{ block.settings.placeholder | default: 'Enter your email address' }}" required />
-                <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;border-radius:8px;font-weight:600;">
-                  {{ block.settings.btn_text | default: 'Subscribe' }}
+              <div class="footer-newsletter-form">
+                <input type="email" name="contact[email]" placeholder="{{ block.settings.placeholder | default: 'your@email.com' }}" required autocomplete="email" />
+                <button type="submit" aria-label="Subscribe">
+                  <i class="fa-solid fa-arrow-right"></i>
                 </button>
               </div>
             {%- endform -%}
+            <p class="footer-newsletter-note">
+              <i class="fa-solid fa-lock" style="margin-right:5px;font-size:0.6rem;"></i>
+              We respect your privacy. Unsubscribe anytime.
+            </p>
           </div>
         {%- endif -%}
       {%- endfor -%}
     </div>
 
-    <!-- Footer Bottom -->
-    <div class="footer-bottom">
-      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_text | default: 'Constructed for the future.' }}</p>
-
-      <div class="footer-legal-links">
-        {%- if section.settings.privacy_link != blank -%}
-          <a href="{{ section.settings.privacy_link }}">Privacy Policy</a>
-        {%- endif -%}
-        {%- if section.settings.terms_link != blank -%}
-          <a href="{{ section.settings.terms_link }}">Terms of Service</a>
-        {%- endif -%}
-        {%- if section.settings.refund_link != blank -%}
-          <a href="{{ section.settings.refund_link }}">Return Policy</a>
-        {%- endif -%}
+    <!-- Trust Bar -->
+    <div class="footer-trust-bar">
+      <div class="footer-trust-item">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>Secure Payments</span>
+      </div>
+      <div class="footer-trust-item">
+        <i class="fa-solid fa-rotate-left"></i>
+        <span>Easy Returns</span>
+      </div>
+      <div class="footer-trust-item">
+        <i class="fa-solid fa-certificate"></i>
+        <span>100% Authentic</span>
+      </div>
+      <div class="footer-trust-item">
+        <i class="fa-solid fa-headset"></i>
+        <span>24/7 Support</span>
       </div>
 
-      <div class="payment-icons">
+      <div class="footer-payments">
         <i class="fa-brands fa-cc-visa"></i>
         <i class="fa-brands fa-cc-mastercard"></i>
-        <i class="fa-brands fa-cc-paypal"></i>
+        <i class="fa-brands fa-cc-amex"></i>
         <i class="fa-brands fa-google-pay"></i>
         <i class="fa-brands fa-apple-pay"></i>
+        <i class="fa-brands fa-cc-paypal"></i>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom-bar">
+      <p class="footer-copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
+        <span class="footer-tagline-sm">{{ section.settings.copyright_suffix | default: 'Built for the future.' }}</span>
+      </p>
+      <div class="footer-legal">
+        {%- if section.settings.privacy_link != blank -%}
+          <a href="{{ section.settings.privacy_link }}">Privacy</a>
+        {%- endif -%}
+        {%- if section.settings.terms_link != blank -%}
+          <a href="{{ section.settings.terms_link }}">Terms</a>
+        {%- endif -%}
+        {%- if section.settings.refund_link != blank -%}
+          <a href="{{ section.settings.refund_link }}">Returns</a>
+        {%- endif -%}
+        {%- if section.settings.shipping_link != blank -%}
+          <a href="{{ section.settings.shipping_link }}">Shipping</a>
+        {%- endif -%}
       </div>
     </div>
   </div>
 </footer>
+
+<style>
+  /* ===================================
+     Pre-Footer Features Bar
+     =================================== */
+  .footer-features {
+    background: linear-gradient(180deg, transparent 0%, rgba(68, 214, 44, 0.03) 100%);
+    border-top: 1px solid rgba(255,255,255,0.04);
+    padding: 40px 0;
+  }
+
+  .footer-features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .footer-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 15px 25px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-feature-item:last-child { border-right: none; }
+
+  .footer-feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(68, 214, 44, 0.08);
+    border: 1px solid rgba(68, 214, 44, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .footer-feature-icon i {
+    color: var(--accent);
+    font-size: 1.1rem;
+  }
+
+  .footer-feature-text h5 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+    color: #fff;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+  }
+
+  .footer-feature-text p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* ===================================
+     Futuristic Footer
+     =================================== */
+  .footer-futuristic {
+    background: #030303;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer-glow-line {
+    height: 2px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(68, 214, 44, 0.1) 15%,
+      rgba(68, 214, 44, 0.6) 30%,
+      var(--accent) 50%,
+      rgba(68, 214, 44, 0.6) 70%,
+      rgba(68, 214, 44, 0.1) 85%,
+      transparent 100%);
+    box-shadow: 0 0 20px rgba(68, 214, 44, 0.25),
+                0 0 60px rgba(68, 214, 44, 0.1);
+  }
+
+  .footer-upper {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    padding: 70px 0 50px;
+  }
+
+  /* Brand Column */
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    margin-bottom: 20px;
+  }
+
+  .footer-logo span {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: var(--font-heading);
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+  .footer-tagline {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.7;
+    margin-bottom: 25px;
+    max-width: 280px;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 10px;
+  }
+
+  .footer-social-link {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .footer-social-link:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(68, 214, 44, 0.3);
+  }
+
+  /* Link Columns */
+  .footer-col-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 22px;
+    font-family: var(--font-heading);
+    position: relative;
+    padding-bottom: 12px;
+  }
+
+  .footer-col-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 1px;
+  }
+
+  .footer-link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-link-list li {
+    margin-bottom: 10px;
+  }
+
+  .footer-link-list a {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    position: relative;
+    padding-left: 0;
+  }
+
+  .footer-link-list a:hover {
+    color: var(--accent);
+    padding-left: 8px;
+  }
+
+  /* Newsletter Column */
+  .footer-newsletter-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+
+  .footer-newsletter-form {
+    display: flex;
+    gap: 0;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .footer-newsletter-form:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(68, 214, 44, 0.1);
+  }
+
+  .footer-newsletter-form input {
+    flex: 1;
+    padding: 14px 16px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 0.88rem;
+    font-family: inherit;
+    outline: none;
+  }
+
+  .footer-newsletter-form input::placeholder {
+    color: rgba(255,255,255,0.25);
+  }
+
+  .footer-newsletter-form button {
+    padding: 14px 20px;
+    background: var(--accent);
+    border: none;
+    color: #000;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-newsletter-form button:hover {
+    background: #55e63d;
+    padding-right: 24px;
+  }
+
+  .footer-newsletter-note {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.25);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Trust Bar */
+  .footer-trust-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .footer-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .footer-trust-item i {
+    color: rgba(68, 214, 44, 0.5);
+    font-size: 0.85rem;
+  }
+
+  .footer-payments {
+    display: flex;
+    gap: 12px;
+    font-size: 1.4rem;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .footer-payments i {
+    transition: color 0.2s ease;
+  }
+
+  .footer-payments i:hover {
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* Bottom Bar */
+  .footer-bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 0 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .footer-copyright {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.25);
+    margin: 0;
+  }
+
+  .footer-tagline-sm {
+    color: rgba(255,255,255,0.15);
+    margin-left: 8px;
+  }
+
+  .footer-legal {
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer-legal a {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.25);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.2s ease;
+  }
+
+  .footer-legal a:hover {
+    color: var(--accent);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .footer-upper { grid-template-columns: 1fr 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+    .footer-newsletter { grid-column: 1 / -1; }
+    .footer-features-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-feature-item:nth-child(2) { border-right: none; }
+  }
+
+  @media (max-width: 768px) {
+    .footer-upper { grid-template-columns: 1fr 1fr; gap: 30px; }
+    .footer-features-grid { grid-template-columns: 1fr; }
+    .footer-feature-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 15px 0; }
+    .footer-feature-item:last-child { border-bottom: none; }
+    .footer-trust-bar { justify-content: center; text-align: center; }
+    .footer-bottom-bar { flex-direction: column; text-align: center; }
+    .footer-legal { justify-content: center; }
+  }
+
+  @media (max-width: 480px) {
+    .footer-upper { grid-template-columns: 1fr; }
+  }
+</style>
 
 {% schema %}
 {
@@ -112,19 +535,19 @@
       "type": "text",
       "id": "logo_icon",
       "label": "Logo Icon Class",
-      "default": "fa-solid fa-microchip"
+      "default": "fa-solid fa-atom"
     },
     {
       "type": "textarea",
-      "id": "about_text",
-      "label": "About Text",
-      "default": "Your premium destination for high-end electronics, elite gaming gear, and professional PC components. We deliver uncompromising performance directly to your doorstep."
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Your ultimate destination for premium tech & gaming peripherals. Engineered for excellence."
     },
     {
       "type": "text",
-      "id": "copyright_text",
-      "label": "Copyright Text",
-      "default": "Constructed for the future."
+      "id": "copyright_suffix",
+      "label": "Copyright Suffix",
+      "default": "Built for the future."
     },
     {
       "type": "url",
@@ -140,9 +563,38 @@
       "type": "url",
       "id": "refund_link",
       "label": "Return Policy Link"
+    },
+    {
+      "type": "url",
+      "id": "shipping_link",
+      "label": "Shipping Policy Link"
     }
   ],
   "blocks": [
+    {
+      "type": "feature_item",
+      "name": "Feature Badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon Class",
+          "default": "fa-solid fa-truck-fast"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "On orders above ₹999"
+        }
+      ]
+    },
     {
       "type": "link_column",
       "name": "Link Column",
@@ -151,7 +603,7 @@
           "type": "text",
           "id": "heading",
           "label": "Column Heading",
-          "default": "Links"
+          "default": "Shop"
         },
         {
           "type": "link_list",
@@ -162,7 +614,7 @@
           "type": "text",
           "id": "links_text",
           "label": "Manual Links (pipe-separated, fallback)",
-          "info": "e.g. Processors|Graphics Cards|Motherboards|Memory"
+          "info": "e.g. Laptops|Monitors|Keyboards|Components"
         }
       ]
     },
@@ -175,25 +627,19 @@
           "type": "text",
           "id": "heading",
           "label": "Heading",
-          "default": "Galaxy Insider"
+          "default": "Stay in the Loop"
         },
         {
           "type": "textarea",
           "id": "description",
           "label": "Description",
-          "default": "Join the elite. Subscribe for exclusive hardware drops, early access deals, and the latest tech news."
+          "default": "Get exclusive deals, early access & tech news delivered to your inbox."
         },
         {
           "type": "text",
           "id": "placeholder",
           "label": "Input Placeholder",
-          "default": "Enter your email address"
-        },
-        {
-          "type": "text",
-          "id": "btn_text",
-          "label": "Button Text",
-          "default": "Subscribe"
+          "default": "your@email.com"
         }
       ]
     }
