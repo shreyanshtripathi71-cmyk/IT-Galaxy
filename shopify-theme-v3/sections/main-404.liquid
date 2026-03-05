@@ -1,0 +1,30 @@
+{%- comment -%} 404 Page Section {%- endcomment -%}
+
+<div class="container section-padding" style="text-align:center;min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+  <h1 style="font-size:8rem;margin-bottom:0;color:var(--accent);line-height:1;">404</h1>
+  <h2 style="font-size:2rem;margin-bottom:20px;">Page Not Found</h2>
+  <p style="color:var(--text-muted);margin-bottom:40px;max-width:500px;">
+    {{ section.settings.message | default: "The page you're looking for doesn't exist or has been moved." }}
+  </p>
+  <a href="/" class="btn btn-primary">{{ section.settings.button_text | default: 'Back to Home' }}</a>
+</div>
+
+{% schema %}
+{
+  "name": "404 Page",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "message",
+      "label": "Message",
+      "default": "The page you're looking for doesn't exist or has been moved."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Back to Home"
+    }
+  ]
+}
+{% endschema %}

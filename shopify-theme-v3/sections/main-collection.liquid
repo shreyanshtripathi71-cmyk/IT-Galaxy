@@ -1,0 +1,40 @@
+{%- comment -%} Collection Page Section {%- endcomment -%}
+
+<div class="container section-padding">
+  <div class="section-header" style="text-align:left;margin-bottom:40px;">
+    <h1 style="font-size:2.5rem;">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p style="color:var(--text-muted);margin-top:10px;">{{ collection.description }}</p>
+    {%- endif -%}
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));gap:25px;">
+    {%- for product in collection.products -%}
+      <a href="{{ product.url }}" style="text-decoration:none;">
+        {% render 'product-card',
+          product_image: product.featured_image | image_url: width: 400,
+          product_title: product.title,
+          product_category: product.type,
+          product_price: product.price | money,
+          compare_price: product.compare_at_price | money,
+          badge_text: null
+        %}
+      </a>
+    {%- else -%}
+      <p style="color:var(--text-muted);grid-column:1/-1;text-align:center;padding:60px 0;">No products found in this collection.</p>
+    {%- endfor -%}
+  </div>
+
+  {%- if paginate.pages > 1 -%}
+    <div style="text-align:center;margin-top:50px;">
+      {{ paginate | default_pagination }}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collection Page",
+  "settings": []
+}
+{% endschema %}

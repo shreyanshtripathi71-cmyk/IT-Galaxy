@@ -1,0 +1,28 @@
+{%- comment -%} Collections List Section {%- endcomment -%}
+
+<div class="container section-padding">
+  <h1 style="font-size:2.5rem;margin-bottom:40px;">All Collections</h1>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:30px;">
+    {%- for collection in collections -%}
+      <a href="{{ collection.url }}" class="wide-cat-card" style="height:300px;text-decoration:none;display:block;">
+        {%- if collection.image -%}
+          <img src="{{ collection.image | image_url: width: 600 }}" alt="{{ collection.title | escape }}" />
+        {%- elsif collection.products.first -%}
+          <img src="{{ collection.products.first.featured_image | image_url: width: 600 }}" alt="{{ collection.title | escape }}" />
+        {%- endif -%}
+        <div class="wide-cat-overlay">
+          <h3>{{ collection.title }}</h3>
+          <p>{{ collection.products_count }} products</p>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collections List",
+  "settings": []
+}
+{% endschema %}

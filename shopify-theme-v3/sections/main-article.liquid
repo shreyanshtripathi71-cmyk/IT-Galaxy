@@ -1,0 +1,28 @@
+{%- comment -%} Article Page Section {%- endcomment -%}
+
+<div class="container section-padding" style="max-width:800px;">
+  <p style="font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:15px;">
+    {{ article.published_at | date: '%B %d, %Y' }} • {{ article.author }}
+  </p>
+  <h1 style="font-size:2.5rem;margin-bottom:30px;">{{ article.title }}</h1>
+
+  {%- if article.image -%}
+    <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.title | escape }}"
+      style="width:100%;border-radius:8px;margin-bottom:40px;" />
+  {%- endif -%}
+
+  <div class="page-content" style="color:var(--text-muted);line-height:1.8;font-size:1.05rem;">
+    {{ article.content }}
+  </div>
+
+  <div style="margin-top:50px;padding-top:30px;border-top:1px solid var(--border-color);">
+    <a href="{{ blog.url }}" style="color:var(--accent);font-weight:600;">← Back to {{ blog.title }}</a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Article Page",
+  "settings": []
+}
+{% endschema %}

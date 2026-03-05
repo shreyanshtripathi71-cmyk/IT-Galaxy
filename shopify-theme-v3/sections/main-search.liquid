@@ -1,0 +1,53 @@
+{%- comment -%} Search Results Section {%- endcomment -%}
+
+<div class="container section-padding">
+  <h1 style="font-size:2.5rem;margin-bottom:30px;">
+    {%- if search.performed -%}
+      Search results for "{{ search.terms }}"
+    {%- else -%}
+      Search
+    {%- endif -%}
+  </h1>
+
+  <form action="/search" method="get" style="margin-bottom:40px;">
+    <div style="display:flex;gap:10px;max-width:600px;">
+      <input type="text" name="q" value="{{ search.terms | escape }}" placeholder="Search products..."
+        style="flex:1;padding:12px 15px;background:#111;border:1px solid var(--border-color);color:white;border-radius:4px;font-family:inherit;" />
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+
+  {%- if search.performed -%}
+    {%- if search.results.size > 0 -%}
+      <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));gap:25px;">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            <a href="{{ item.url }}" style="text-decoration:none;">
+              {% render 'product-card',
+                product_image: item.featured_image | image_url: width: 400,
+                product_title: item.title,
+                product_category: item.type,
+                product_price: item.price | money,
+                compare_price: item.compare_at_price | money
+              %}
+            </a>
+          {%- else -%}
+            <a href="{{ item.url }}" style="background:#111;border:1px solid var(--border-color);border-radius:8px;padding:25px;text-decoration:none;transition:all 0.3s ease;">
+              <h3 style="font-size:1.1rem;margin-bottom:8px;color:white;">{{ item.title }}</h3>
+              <p style="color:var(--text-muted);font-size:0.9rem;">{{ item.content | strip_html | truncate: 120 }}</p>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p style="color:var(--text-muted);text-align:center;padding:40px 0;">No results found for "{{ search.terms }}".</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Search Results",
+  "settings": []
+}
+{% endschema %}

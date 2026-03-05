@@ -1,0 +1,15 @@
+{%- comment -%} Static Page Section {%- endcomment -%}
+
+<div class="container section-padding" style="max-width:900px;">
+  <h1 style="font-size:2.5rem;margin-bottom:30px;">{{ page.title }}</h1>
+  <div class="page-content" style="color:var(--text-muted);line-height:1.8;font-size:1.05rem;">
+    {{ page.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page Content",
+  "settings": []
+}
+{% endschema %}

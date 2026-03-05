@@ -1,0 +1,27 @@
+{%- comment -%} Blog Page Section {%- endcomment -%}
+
+<div class="container section-padding">
+  <h1 style="font-size:2.5rem;margin-bottom:40px;">{{ blog.title }}</h1>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:30px;">
+    {%- for article in blog.articles -%}
+      <a href="{{ article.url }}" style="background:#0a0a0a;border:1px solid var(--border-color);border-radius:8px;overflow:hidden;text-decoration:none;transition:all 0.3s ease;">
+        {%- if article.image -%}
+          <img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.title | escape }}" style="width:100%;height:200px;object-fit:cover;" />
+        {%- endif -%}
+        <div style="padding:25px;">
+          <p style="font-size:0.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">{{ article.published_at | date: '%b %d, %Y' }}</p>
+          <h3 style="font-size:1.2rem;margin-bottom:10px;color:white;">{{ article.title }}</h3>
+          <p style="color:var(--text-muted);font-size:0.9rem;">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog Page",
+  "settings": []
+}
+{% endschema %}

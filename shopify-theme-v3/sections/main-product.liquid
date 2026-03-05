@@ -1,0 +1,76 @@
+{%- comment -%} Product Page Section {%- endcomment -%}
+
+<div class="container section-padding">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;">
+    <!-- Product Images -->
+    <div>
+      <div style="background:#0a0a0a;border:1px solid var(--border-color);border-radius:8px;overflow:hidden;aspect-ratio:1;">
+        {%- if product.featured_image -%}
+          <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title | escape }}"
+            style="width:100%;height:100%;object-fit:contain;" />
+        {%- endif -%}
+      </div>
+      {%- if product.images.size > 1 -%}
+        <div style="display:flex;gap:10px;margin-top:15px;overflow-x:auto;">
+          {%- for image in product.images -%}
+            <div style="width:80px;height:80px;border:1px solid var(--border-color);border-radius:4px;overflow:hidden;flex-shrink:0;cursor:pointer;">
+              <img src="{{ image | image_url: width: 160 }}" alt="{{ product.title | escape }}" style="width:100%;height:100%;object-fit:contain;" />
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Product Info -->
+    <div>
+      <p style="font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);margin-bottom:10px;">{{ product.vendor }}</p>
+      <h1 style="font-size:2.2rem;margin-bottom:15px;">{{ product.title }}</h1>
+
+      <div style="display:flex;align-items:center;gap:15px;margin-bottom:25px;">
+        <span style="font-size:1.8rem;font-weight:700;color:white;">{{ product.price | money }}</span>
+        {%- if product.compare_at_price > product.price -%}
+          <del style="font-size:1.1rem;color:var(--text-muted);">{{ product.compare_at_price | money }}</del>
+          {%- assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+          <span class="neon-tag">-{{ discount }}%</span>
+        {%- endif -%}
+      </div>
+
+      <div style="color:var(--text-muted);line-height:1.7;margin-bottom:30px;">
+        {{ product.description }}
+      </div>
+
+      {%- form 'product', product -%}
+        {%- if product.variants.size > 1 -%}
+          <div style="margin-bottom:20px;">
+            <label for="variant-select" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:8px;display:block;">Variant</label>
+            <select name="id" id="variant-select" style="width:100%;padding:12px;background:#111;border:1px solid var(--border-color);color:white;border-radius:4px;font-family:inherit;">
+              {%- for variant in product.variants -%}
+                <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
+                  {{ variant.title }} — {{ variant.price | money }}
+                </option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- else -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" />
+        {%- endif -%}
+
+        <div style="display:flex;gap:12px;">
+          <button type="submit" class="btn btn-primary" style="flex:1;text-align:center;">
+            <i class="fa-solid fa-cart-shopping" style="margin-right:8px;"></i> Add to Cart
+          </button>
+          <button type="button" class="btn btn-outline" style="width:50px;padding:15px;" aria-label="Wishlist">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Page",
+  "settings": []
+}
+{% endschema %}
