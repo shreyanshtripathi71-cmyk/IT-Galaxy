@@ -51,7 +51,7 @@
               hide_actions: true
             %}
           {%- endfor -%}
-        {%- else -%}
+        {%- elsif section.blocks.size > 0 -%}
           {%- for block in section.blocks -%}
             {%- if block.type == 'deal' -%}
               {% render 'product-card',
@@ -67,6 +67,16 @@
               %}
             {%- endif -%}
           {%- endfor -%}
+        {%- else -%}
+          <!-- Sample flash deals shown when no collection/blocks are set -->
+          {% render 'product-card', card_class: 'flash-card', product_image: 'https://images.unsplash.com/photo-1597872200370-496de2c1a82b?auto=format&fit=crop&w=400&q=80', product_title: 'AMD Ryzen 9 7950X Processor', product_category: 'Processors', product_price: '₹52,499', compare_price: '₹68,000', badge_text: '-35%', badge_type: 'flash' %}
+          {% render 'product-card', card_class: 'flash-card', product_image: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=400&q=80', product_title: 'GeForce RTX 4090 24GB OC', product_category: 'Graphics Cards', product_price: '₹1,45,999', compare_price: '₹1,89,999', badge_text: '-23%', badge_type: 'flash' %}
+          {% render 'product-card', card_class: 'flash-card', product_image: 'https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=400&q=80', product_title: '34" Ultrawide QHD 144Hz Curved', product_category: 'Monitors', product_price: '₹38,999', compare_price: '₹54,999', badge_text: '-29%', badge_type: 'flash' %}
+          {% render 'product-card', card_class: 'flash-card', product_image: 'https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=400&q=80', product_title: 'ROG Maximus Z790 Hero', product_category: 'Motherboards', product_price: '₹42,999', compare_price: '₹55,000', badge_text: '-22%', badge_type: 'flash' %}
+          {% render 'product-card', card_class: 'flash-card', product_image: 'https://images.unsplash.com/photo-1626218174358-7769486c4b79?auto=format&fit=crop&w=400&q=80', product_title: '64GB DDR5 5600MHz Kit', product_category: 'Memory', product_price: '₹18,999', compare_price: '₹24,999', badge_text: '-24%', badge_type: 'flash' %}
+          {% render 'product-card', card_class: 'flash-card', product_image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=400&q=80', product_title: 'Custom Mechanical Keyboard 75%', product_category: 'Peripherals', product_price: '₹7,999', compare_price: '₹11,999', badge_text: '-33%', badge_type: 'flash' %}
+          {% render 'product-card', card_class: 'flash-card', product_image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=400&q=80', product_title: 'Audiophile Planar Magnetic Cans', product_category: 'Audio', product_price: '₹11,499', compare_price: '₹16,999', badge_text: '-32%', badge_type: 'flash' %}
+          {% render 'product-card', card_class: 'flash-card', product_image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80', product_title: 'Wi-Fi 7 Mesh Router System', product_category: 'Networking', product_price: '₹22,999', compare_price: '₹32,000', badge_text: '-28%', badge_type: 'flash' %}
         {%- endif -%}
       </div>
 

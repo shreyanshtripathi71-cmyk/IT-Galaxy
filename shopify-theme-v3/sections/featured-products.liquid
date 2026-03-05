@@ -38,7 +38,7 @@
               badge_text: null
             %}
           {%- endfor -%}
-        {%- else -%}
+        {%- elsif section.blocks.size > 0 -%}
           {%- for block in section.blocks -%}
             {%- if block.type == 'product' -%}
               {% render 'product-card',
@@ -53,6 +53,18 @@
               %}
             {%- endif -%}
           {%- endfor -%}
+        {%- else -%}
+          <!-- Sample products shown when no collection/blocks are set -->
+          {% render 'product-card', product_image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=400&q=80', product_title: 'Mechanical RGB Gaming Keyboard Pro', product_category: 'Peripherals', product_price: '₹8,499', compare_price: '₹12,999', product_rating: '4.8', badge_text: 'Sale' %}
+          {% render 'product-card', product_image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=400&q=80', product_title: 'Wireless Noise Cancelling Headset 7.1', product_category: 'Audio', product_price: '₹14,200', compare_price: '', product_rating: '4.9', badge_text: '' %}
+          {% render 'product-card', product_image: 'https://images.unsplash.com/photo-1625842268584-8f3296236761?auto=format&fit=crop&w=400&q=80', product_title: 'Ultralight Wireless Gaming Mouse', product_category: 'Mice', product_price: '₹6,999', compare_price: '', product_rating: '4.7', badge_text: 'New', badge_color: '#44D62C' %}
+          {% render 'product-card', product_image: 'https://images.unsplash.com/photo-1600003014794-cfd82e9714af?auto=format&fit=crop&w=400&q=80', product_title: 'Premium Wrist Rest & Deskpad Combo', product_category: 'Accessories', product_price: '₹4,499', compare_price: '₹5,999', product_rating: '4.6', badge_text: '' %}
+          {% render 'product-card', product_image: 'https://images.unsplash.com/photo-1597872200370-496de2c1a82b?auto=format&fit=crop&w=400&q=80', product_title: 'Intel Core i9-14900K Processor', product_category: 'Components', product_price: '₹18,500', compare_price: '', product_rating: '4.9', badge_text: '' %}
+          {% render 'product-card', product_image: 'https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=400&q=80', product_title: '27" 1440p 165Hz IPS Gaming Monitor', product_category: 'Monitors', product_price: '₹28,999', compare_price: '', product_rating: '4.8', badge_text: '' %}
+          {% render 'product-card', product_image: 'https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=400&q=80', product_title: 'Z790 Elite AX DDR5 Motherboard', product_category: 'Components', product_price: '₹24,500', compare_price: '', product_rating: '4.7', badge_text: '' %}
+          {% render 'product-card', product_image: 'https://images.unsplash.com/photo-1626218174358-7769486c4b79?auto=format&fit=crop&w=400&q=80', product_title: '32GB DDR5 6000MHz RGB RAM', product_category: 'Memory', product_price: '₹12,499', compare_price: '', product_rating: '4.8', badge_text: '' %}
+          {% render 'product-card', product_image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80', product_title: 'AX6000 Wi-Fi 6 Gaming Router', product_category: 'Networking', product_price: '₹16,999', compare_price: '', product_rating: '4.6', badge_text: '' %}
+          {% render 'product-card', product_image: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=400&q=80', product_title: 'GeForce RTX 4080 Super 16GB', product_category: 'Graphics Cards', product_price: '₹1,15,999', compare_price: '', product_rating: '5.0', badge_text: 'Top', badge_color: '#44D62C' %}
         {%- endif -%}
       </div>
 
